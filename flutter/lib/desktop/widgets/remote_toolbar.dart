@@ -28,6 +28,49 @@ import './kb_layout_type_chooser.dart';
 import 'package:flutter_hbb/utils/scale.dart';
 import 'package:flutter_hbb/common/widgets/custom_scale_base.dart';
 
+import 'dart:ui';
+import 'package:flutter/material.dart';
+
+class MacOSToolbar extends StatelessWidget {
+  final Widget child;
+
+  const MacOSToolbar({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaX: 18,
+          sigmaY: 18,
+        ),
+        child: Container(
+          height: 54,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.10),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(
+              color: Colors.white.withOpacity(0.18),
+              width: 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.25),
+                blurRadius: 20,
+                offset: const Offset(0, 10),
+              ),
+            ],
+          ),
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+
+
 enum _ToolbarEdge { top, right, bottom, left }
 
 _ToolbarEdge _parseToolbarEdge(String? s) {
@@ -376,7 +419,7 @@ class _ToolbarTheme {
 
   static Widget borderWrapper(
       BuildContext context, Widget child, BorderRadius borderRadius) {
-    return Container(
+    return MacOSToolbar(
       decoration: BoxDecoration(
         border: Border.all(
           color: borderColor(context),
