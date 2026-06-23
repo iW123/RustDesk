@@ -31,44 +31,6 @@ import 'package:flutter_hbb/common/widgets/custom_scale_base.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-class MacOSToolbar extends StatelessWidget {
-  final Widget child;
-  const MacOSToolbar({super.key, required this.child});
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: 18,
-          sigmaY: 18,
-        ),
-        child: Container(
-          height: 54,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.10),
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-              color: Colors.white.withOpacity(0.18),
-              width: 1,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.25),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
-              ),
-            ],
-          ),
-          child: child,
-        ),
-      ),
-    );
-  }
-}
-
-
 enum _ToolbarEdge { top, right, bottom, left }
 
 _ToolbarEdge _parseToolbarEdge(String? s) {
@@ -418,14 +380,19 @@ class _ToolbarTheme {
   static Widget borderWrapper(
       BuildContext context, Widget child, BorderRadius borderRadius) {
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: borderColor(context),
-          width: 1,
-        ),
-        borderRadius: borderRadius,
-      ),
-      child: child,
+	ClipRect(
+	  child: BackdropFilter(
+	    filter: ImageFilter.blur(sigmaX: 18.0, sigmaY: 18.0),
+	    child: Container(
+	      // 保留原本 Container 里的 width、height 
+	      decoration: BoxDecoration(
+	        color: Colors.white.withOpacity(0.15),  // 替换掉原有的纯色/主题色
+	        borderRadius: BorderRadius.circular(10.0),
+	      ),
+	      child: child,  // 原本内部的组件保持不变
+	    ),
+	  ),
+	)
     );
   }
 }
@@ -895,7 +862,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     }
     if (!isWeb) toolbarItems.add(_RecordMenu());
     toolbarItems.add(_CloseMenu(id: widget.id, ffi: widget.ffi));
-    final toolbarBorderRadius = BorderRadius.all(Radius.circular(14.0));
+    final toolbarBorderRadius = BorderRadius.vertical(bottom: Radius.circular(8.0));
     // innerAxis: how the toolbar icons themselves flow.
     // outerAxis: how the toolbar block and the handle stack against each other
     // (perpendicular to the dock edge, so the handle hangs off the interior face).
