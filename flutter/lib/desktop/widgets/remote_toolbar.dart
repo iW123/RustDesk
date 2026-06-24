@@ -787,17 +787,11 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       return Offstage(
         offstage: _dragging.isTrue,
         child: ClipRRect(
-          borderRadius: borderRadius,
-          clipBehavior: Clip.hardEdge,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.10),
-                border: Border.all(
-                  color: Colors.white.withOpacity(0.12),
-                  width: 1,
-                ),
               ),
               child: _DraggableShowHide(
                 id: widget.id,
