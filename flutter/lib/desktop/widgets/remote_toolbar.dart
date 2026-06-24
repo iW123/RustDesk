@@ -788,6 +788,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         offstage: _dragging.isTrue,
         child: ClipRRect(
           borderRadius: borderRadius,
+          clipBehavior: Clip.antiAlias,
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
