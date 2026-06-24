@@ -376,28 +376,28 @@ class _ToolbarTheme {
     overlayColor: MaterialStatePropertyAll(Colors.transparent),
   );
 
-	static Widget borderWrapper(
-	  BuildContext context,
-	  Widget child,
-	  BorderRadius borderRadius,
-	) {
-	  return ClipRRect(
-	    borderRadius: borderRadius,
-	    child: BackdropFilter(
-	      filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
-	      child: Container(
-	        decoration: BoxDecoration(
-	          color: Colors.white.withOpacity(0.12),
-	          border: Border.all(
-	            color: Colors.white.withOpacity(0.08),
-	            width: 1,
-	          ),
-	        ),
-	        child: child,
-	      ),
-	    ),
-	  );
-	}
+    static Widget borderWrapper(
+      BuildContext context,
+      Widget child,
+      BorderRadius borderRadius,
+    ) {
+      return ClipRRect(
+        borderRadius: borderRadius,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.12),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.08),
+                width: 1,
+              ),
+            ),
+            child: child,
+          ),
+        ),
+      );
+    }
 
 }
 
@@ -789,29 +789,51 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           elevation: _ToolbarTheme.elevation,
           shadowColor: MyTheme.color(context).shadow,
           borderRadius: borderRadius,
-          child: _DraggableShowHide(
-            id: widget.id,
-            ffi: widget.ffi,
-            sessionId: widget.ffi.sessionId,
-            dragging: _dragging,
-            fraction: _fraction,
-            edge: _edge,
-            previewEdge: _previewEdge,
-            previewFraction: _previewFraction,
-            toolbarSize: _toolbarSize,
-            markDragEpoch: _markToolbarDragEpoch,
-            syncDockingOptionsAfterDragIfNeeded:
-                _syncDockingOptionsAfterDragIfNeeded,
-            isHorizontal: isHorizontal,
-            multiEdgeEnabled: _multiEdgeEnabled.value,
-            toolbarState: widget.state,
-            setFullscreen: _setFullscreen,
-            setMinimize: _minimize,
-            borderRadius: borderRadius,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildMacosGrip(),
+              _DraggableShowHide(
+                id: widget.id,
+                ffi: widget.ffi,
+                sessionId: widget.ffi.sessionId,
+                dragging: _dragging,
+                fraction: _fraction,
+                edge: _edge,
+                previewEdge: _previewEdge,
+                previewFraction: _previewFraction,
+                toolbarSize: _toolbarSize,
+                markDragEpoch: _markToolbarDragEpoch,
+                syncDockingOptionsAfterDragIfNeeded:
+                    _syncDockingOptionsAfterDragIfNeeded,
+                isHorizontal: isHorizontal,
+                multiEdgeEnabled: _multiEdgeEnabled.value,
+                toolbarState: widget.state,
+                setFullscreen: _setFullscreen,
+                setMinimize: _minimize,
+                borderRadius: borderRadius,
+              ),
+            ],
           ),
         ),
       );
     });
+  }
+
+  Widget _buildMacosGrip() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 6, bottom: 6),
+      child: Center(
+        child: Container(
+          width: 36,
+          height: 5,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.22),
+            borderRadius: BorderRadius.circular(3),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildToolbar(
@@ -866,7 +888,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     }
     if (!isWeb) toolbarItems.add(_RecordMenu());
     toolbarItems.add(_CloseMenu(id: widget.id, ffi: widget.ffi));
-    final toolbarBorderRadius = BorderRadius.vertical(bottom: Radius.circular(8.0));
+    final toolbarBorderRadius = BorderRadius.vertical(bottom: Radius.circular(6.0));
     // innerAxis: how the toolbar icons themselves flow.
     // outerAxis: how the toolbar block and the handle stack against each other
     // (perpendicular to the dock edge, so the handle hangs off the interior face).
@@ -878,22 +900,22 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
   final toolbarMaterial = ClipRRect(
     borderRadius: toolbarBorderRadius,
     child: BackdropFilter(
-      filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
+      filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
       child: Container(
         
         decoration: BoxDecoration(
-          color: Color(0xFF1C1C1E).withOpacity(0.55), // Sonoma 关键层
+          color: Colors.white.withOpacity(0.08), // Sonoma 关键层
           borderRadius: toolbarBorderRadius,
           border: Border.all(
-            color: Colors.white.withOpacity(0.10),
+            color: Colors.white.withOpacity(0.18),
             width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.18),
-              blurRadius: 30,
-                spreadRadius: 2,
-              offset: const Offset(0, 12),
+              color: Colors.black.withOpacity(0.182),
+              blurRadius: 40,
+                spreadRadius: 1,
+              offset: const Offset(0, 16),
             ),
           ],
         ),
