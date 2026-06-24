@@ -387,7 +387,7 @@ class _ToolbarTheme {
           filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.12),
+              color: Colors.white.withOpacity(0.10),
               border: Border.all(
                 color: Colors.white.withOpacity(0.08),
                 width: 1,
@@ -493,6 +493,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
   // Kept in sync after settings-triggered rebuilds.
   final _multiEdgeEnabled = false.obs;
   final _dockingOptionsInitialized = false.obs;
+  final _collapseHover = false.obs;
   bool _pendingDockingOptionSync = false;
   int _dockingOptionSyncSerial = 0;
   int _dragEpoch = 0;
@@ -788,46 +789,40 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         child: ClipRRect(
           borderRadius: borderRadius,
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
+            filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
-              color: Colors.white.withOpacity(0.10),
-              child: Material(
-                type: MaterialType.transparency,
-                elevation: _ToolbarTheme.elevation,
-                shadowColor: MyTheme.color(context).shadow,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _buildMacosGrip(),
-                    _DraggableShowHide(
-                      id: widget.id,
-                      ffi: widget.ffi,
-                      sessionId: widget.ffi.sessionId,
-                      dragging: _dragging,
-                      fraction: _fraction,
-                      edge: _edge,
-                      previewEdge: _previewEdge,
-                      previewFraction: _previewFraction,
-                      toolbarSize: _toolbarSize,
-                      markDragEpoch: _markToolbarDragEpoch,
-                      syncDockingOptionsAfterDragIfNeeded:
-                          _syncDockingOptionsAfterDragIfNeeded,
-                      isHorizontal: isHorizontal,
-                      multiEdgeEnabled: _multiEdgeEnabled.value,
-                      toolbarState: widget.state,
-                      setFullscreen: _setFullscreen,
-                      setMinimize: _minimize,
-                      borderRadius: borderRadius,
-                    ),
-                  ],
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.10),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.12),
+                  width: 1,
                 ),
+              ),
+              child: _DraggableShowHide(
+                id: widget.id,
+                ffi: widget.ffi,
+                sessionId: widget.ffi.sessionId,
+                dragging: _dragging,
+                fraction: _fraction,
+                edge: _edge,
+                previewEdge: _previewEdge,
+                previewFraction: _previewFraction,
+                toolbarSize: _toolbarSize,
+                markDragEpoch: _markToolbarDragEpoch,
+                syncDockingOptionsAfterDragIfNeeded:
+                    _syncDockingOptionsAfterDragIfNeeded,
+                isHorizontal: isHorizontal,
+                multiEdgeEnabled: _multiEdgeEnabled.value,
+                toolbarState: widget.state,
+                setFullscreen: _setFullscreen,
+                setMinimize: _minimize,
+                borderRadius: borderRadius,
               ),
             ),
           ),
         ),
       );
     });
-  }
 
   Widget _buildMacosGrip() {
     return Padding(
