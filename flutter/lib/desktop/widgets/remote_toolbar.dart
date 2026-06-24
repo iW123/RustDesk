@@ -29,7 +29,6 @@ import 'package:flutter_hbb/utils/scale.dart';
 import 'package:flutter_hbb/common/widgets/custom_scale_base.dart';
 
 import 'dart:ui';
-import 'package:flutter/material.dart';
 
 enum _ToolbarEdge { top, right, bottom, left }
 
@@ -377,24 +376,29 @@ class _ToolbarTheme {
     overlayColor: MaterialStatePropertyAll(Colors.transparent),
   );
 
-  static Widget borderWrapper(
-      BuildContext context, Widget child, BorderRadius borderRadius) {
-    return Container(
-	ClipRect(
-	  child: BackdropFilter(
-	    filter: ImageFilter.blur(sigmaX: 18.0, sigmaY: 18.0),
-	    child: Container(
-	      // 保留原本 Container 里的 width、height 
-	      decoration: BoxDecoration(
-	        color: Colors.white.withOpacity(0.15),  // 替换掉原有的纯色/主题色
-	        borderRadius: BorderRadius.circular(10.0),
+	static Widget borderWrapper(
+	  BuildContext context,
+	  Widget child,
+	  BorderRadius borderRadius,
+	) {
+	  return ClipRRect(
+	    borderRadius: borderRadius,
+	    child: BackdropFilter(
+	      filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
+	      child: Container(
+	        decoration: BoxDecoration(
+	          color: Colors.white.withOpacity(0.12),
+	          border: Border.all(
+	            color: Colors.white.withOpacity(0.08),
+	            width: 1,
+	          ),
+	        ),
+	        child: child,
 	      ),
-	      child: child,  // 原本内部的组件保持不变
 	    ),
-	  ),
-	)
-    );
-  }
+	  );
+	}
+
 }
 
 typedef DismissFunc = void Function();
