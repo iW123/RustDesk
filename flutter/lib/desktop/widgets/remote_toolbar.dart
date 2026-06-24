@@ -880,6 +880,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
 	  child: BackdropFilter(
 	    filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
 	    child: Container(
+        
 	      decoration: BoxDecoration(
 	        color: Color(0xFF1C1C1E).withOpacity(0.55), // Sonoma 关键层
 	        borderRadius: toolbarBorderRadius,
@@ -903,15 +904,10 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
 	          child: Flex(
 	              direction: innerAxis,
 	              mainAxisSize: MainAxisSize.min,
-	              children: [
-	                spacer,
-	                ...toolbarItems,
-	                spacer,
-	              ],
-	            ),
-	            toolbarBorderRadius,),
-	        ),
-	      ),
+	              children: [spacer, ...toolbarItems, spacer],
+                  ), toolbarBorderRadius,
+            ),
+          ),
 	    ),
 	  ),
 	);
