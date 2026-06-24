@@ -788,7 +788,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         offstage: _dragging.isTrue,
         child: ClipRRect(
           borderRadius: borderRadius,
-          clipBehavior: Clip.antiAlias,
+          clipBehavior: Clip.hardEdge,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
@@ -894,7 +894,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     }
     if (!isWeb) toolbarItems.add(_RecordMenu());
     toolbarItems.add(_CloseMenu(id: widget.id, ffi: widget.ffi));
-    final toolbarBorderRadius = BorderRadius.vertical(bottom: Radius.circular(6.0));
+    final toolbarBorderRadius = BorderRadius.vertical(bottom: Radius.circular(10.0));
     // innerAxis: how the toolbar icons themselves flow.
     // outerAxis: how the toolbar block and the handle stack against each other
     // (perpendicular to the dock edge, so the handle hangs off the interior face).
@@ -3375,7 +3375,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
 
     buttonWrapper(VoidCallback? onPressed, Widget child,
         {Color hoverColor = _ToolbarTheme.blueColor}) {
-      final bgColor = MaterialStatePropertyAll(Colors.transparent);
+      final bgColor = buttonStyle.backgroundColor?.resolve({});
       return TextButton(
         onPressed: onPressed,
         child: child,
