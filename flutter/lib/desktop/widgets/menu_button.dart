@@ -6,7 +6,7 @@ class MenuButton extends StatefulWidget {
   final Color hoverColor;
   final Color? splashColor;
   final Widget child;
-  final String? tooltip;
+  final String tooltip;
   final EdgeInsetsGeometry padding;
   final bool enableFeedback;
   const MenuButton({
@@ -32,33 +32,34 @@ class _MenuButtonState extends State<MenuButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: widget.padding,
-      child: Tooltip(
-        waitDuration: Duration(milliseconds: 300),
-        message: widget.tooltip,
-        child: Material(
-          type: MaterialType.transparency,
-          child: Container(
+        padding: widget.padding,
+        child: Tooltip(
+          waitDuration: const Duration(milliseconds: 300),
+          showDuration: const Duration(milliseconds: 1500),
+          message: widget.tooltip,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 120),
+            curve: Curves.easeOut,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(_borderRadius),
-              color: _isHover ? widget.hoverColor : widget.color,
+              color: _isHover
+                  ? widget.hoverColor.withOpacity(0.15)
+                  : Colors.transparent,
+              border: Border.all(
+                color: _isHover
+                    ? widget.hoverColor.withOpacity(0.25)
+                    : Colors.transparent,
+                width: 1,
+              ),
             ),
             child: InkWell(
-              hoverColor: widget.hoverColor,
-              onHover: (val) {
-                setState(() {
-                  _isHover = val;
-                });
-              },
               borderRadius: BorderRadius.circular(_borderRadius),
-              splashColor: widget.splashColor,
-              enableFeedback: widget.enableFeedback,
+              onHover: (val) => setState(() => _isHover = val),
               onTap: widget.onPressed,
               child: widget.child,
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
