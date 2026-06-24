@@ -879,11 +879,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       elevation: _ToolbarTheme.elevation,
       shadowColor: MyTheme.color(context).shadow,
       borderRadius: toolbarBorderRadius,
-      color: Theme.of(context)
-          .menuBarTheme
-          .style
-          ?.backgroundColor
-          ?.resolve(MaterialState.values.toSet()),
+      color: Colors.transparent,
       child: SingleChildScrollView(
         scrollDirection: innerAxis,
         child: Theme(
@@ -935,13 +931,15 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         color: _ToolbarTheme.dividerColor(context),
       ),
       menuBarTheme: MenuBarThemeData(
-          style: MenuStyle(
-        padding: MaterialStatePropertyAll(EdgeInsets.zero),
-        elevation: MaterialStatePropertyAll(0),
-        shape: MaterialStatePropertyAll(BeveledRectangleBorder()),
-      ).copyWith(
-              backgroundColor:
-                  Theme.of(context).menuBarTheme.style?.backgroundColor)),
+        style: MenuStyle(
+          padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+          elevation: const MaterialStatePropertyAll(0),
+          backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+          surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent),
+          shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+          shape: const MaterialStatePropertyAll(BeveledRectangleBorder()),
+        ),
+      ),
     );
   }
 }
