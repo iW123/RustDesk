@@ -3375,7 +3375,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
 
     buttonWrapper(VoidCallback? onPressed, Widget child,
         {Color hoverColor = _ToolbarTheme.blueColor}) {
-      final bgColor = buttonStyle.backgroundColor?.resolve({});
+      final bgColor = MaterialStatePropertyAll(Colors.transparent);
       return TextButton(
         onPressed: onPressed,
         child: child,
