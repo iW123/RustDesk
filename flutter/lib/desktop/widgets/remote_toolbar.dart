@@ -875,42 +875,42 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     final spacer = isHorizontal
         ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
         : SizedBox(height: _ToolbarTheme.buttonHMargin * 2);
-	final toolbarMaterial = ClipRRect(
-	  borderRadius: toolbarBorderRadius,
-	  child: BackdropFilter(
-	    filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
-	    child: Container(
+  final toolbarMaterial = ClipRRect(
+    borderRadius: toolbarBorderRadius,
+    child: BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
+      child: Container(
         
-	      decoration: BoxDecoration(
-	        color: Color(0xFF1C1C1E).withOpacity(0.55), // Sonoma 关键层
-	        borderRadius: toolbarBorderRadius,
-	        border: Border.all(
-	          color: Colors.white.withOpacity(0.10),
-	          width: 1,
-	        ),
-	        boxShadow: [
-	          BoxShadow(
-	            color: Colors.black.withOpacity(0.18),
-	            blurRadius: 30,
+        decoration: BoxDecoration(
+          color: Color(0xFF1C1C1E).withOpacity(0.55), // Sonoma 关键层
+          borderRadius: toolbarBorderRadius,
+          border: Border.all(
+            color: Colors.white.withOpacity(0.10),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.18),
+              blurRadius: 30,
                 spreadRadius: 2,
-	            offset: const Offset(0, 12),
-	          ),
-	        ],
-	      ),
-	      child: SingleChildScrollView(
-	        scrollDirection: innerAxis,
-	        child: Theme(
-	          data: themeData(),
-	          child: Flex(
-	              direction: innerAxis,
-	              mainAxisSize: MainAxisSize.min,
-	              children: [spacer, ...toolbarItems, spacer],
-                  ), toolbarBorderRadius,
+              offset: const Offset(0, 12),
+            ),
+          ],
+        ),
+        child: SingleChildScrollView(
+          scrollDirection: innerAxis,
+          child: Theme(
+            data: themeData(),
+            child: Flex(
+                direction: innerAxis,
+                mainAxisSize: MainAxisSize.min,
+                children: [spacer, ...toolbarItems, spacer],
+                  )
             ),
           ),
-	    ),
-	  ),
-	);
+      ),
+    ),
+  );
     final handle = _buildDraggableCollapse(context, edge, isHorizontal);
     // The handle hangs off the interior face of the toolbar (away from the
     // docked edge), centered along that face by the Flex's default cross-axis
