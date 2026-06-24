@@ -823,6 +823,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         ),
       );
     });
+  }
 
   Widget _buildMacosGrip() {
     return Padding(
