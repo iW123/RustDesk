@@ -387,10 +387,10 @@ class _ToolbarTheme {
           filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.10),
+              color: Colors.black.withOpacity(0.10),
               border: Border.all(
                 color: Colors.white.withOpacity(0.08),
-                width: 1,
+                width: 3,
               ),
             ),
             child: child,
