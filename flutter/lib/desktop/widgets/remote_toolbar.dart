@@ -785,35 +785,44 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       final borderRadius = _collapseHandleBorderRadius(edge);
       return Offstage(
         offstage: _dragging.isTrue,
-        child: Material(
-          elevation: _ToolbarTheme.elevation,
-          shadowColor: MyTheme.color(context).shadow,
+        child: ClipRRect(
           borderRadius: borderRadius,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildMacosGrip(),
-              _DraggableShowHide(
-                id: widget.id,
-                ffi: widget.ffi,
-                sessionId: widget.ffi.sessionId,
-                dragging: _dragging,
-                fraction: _fraction,
-                edge: _edge,
-                previewEdge: _previewEdge,
-                previewFraction: _previewFraction,
-                toolbarSize: _toolbarSize,
-                markDragEpoch: _markToolbarDragEpoch,
-                syncDockingOptionsAfterDragIfNeeded:
-                    _syncDockingOptionsAfterDragIfNeeded,
-                isHorizontal: isHorizontal,
-                multiEdgeEnabled: _multiEdgeEnabled.value,
-                toolbarState: widget.state,
-                setFullscreen: _setFullscreen,
-                setMinimize: _minimize,
-                borderRadius: borderRadius,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
+            child: Container(
+              color: Colors.white.withOpacity(0.10),
+              child: Material(
+                type: MaterialType.transparency,
+                elevation: _ToolbarTheme.elevation,
+                shadowColor: MyTheme.color(context).shadow,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _buildMacosGrip(),
+                    _DraggableShowHide(
+                      id: widget.id,
+                      ffi: widget.ffi,
+                      sessionId: widget.ffi.sessionId,
+                      dragging: _dragging,
+                      fraction: _fraction,
+                      edge: _edge,
+                      previewEdge: _previewEdge,
+                      previewFraction: _previewFraction,
+                      toolbarSize: _toolbarSize,
+                      markDragEpoch: _markToolbarDragEpoch,
+                      syncDockingOptionsAfterDragIfNeeded:
+                          _syncDockingOptionsAfterDragIfNeeded,
+                      isHorizontal: isHorizontal,
+                      multiEdgeEnabled: _multiEdgeEnabled.value,
+                      toolbarState: widget.state,
+                      setFullscreen: _setFullscreen,
+                      setMinimize: _minimize,
+                      borderRadius: borderRadius,
+                    ),
+                  ],
+                ),
               ),
-            ],
+            ),
           ),
         ),
       );
