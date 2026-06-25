@@ -552,21 +552,21 @@ jobs:
             }
     steps:
     
-      # # 1. 自动安装并设置 sccache 缓存
-      # - name: Mozilla sccache Action
-      #   uses: mozilla-actions/sccache-action@v0.0.7
+      # 1. 自动安装并设置 sccache 缓存
+      - name: Mozilla sccache Action
+        uses: mozilla-actions/sccache-action@v0.0.7
 
-      # # 2. 将配置注入环境变量，强制 Cargo 编译使用 sccache
-      # - name: Set Environment Variables
-      #   run: |
-      #     echo "RUSTC_WRAPPER=sccache" >> $GITHUB_ENV
-      #     echo "SCCACHE_GHA_ENABLED=true" >> $GITHUB_ENV
+      # 2. 将配置注入环境变量，强制 Cargo 编译使用 sccache
+      - name: Set Environment Variables
+        run: |
+          echo "RUSTC_WRAPPER=sccache" >> $GITHUB_ENV
+          echo "SCCACHE_GHA_ENABLED=true" >> $GITHUB_ENV
 
-      - name: Rust Cache
-        uses: Swatinem/rust-cache@v2
-        with:
-          # 通过显式指定 target 目录防止增量残留冲突
-          shared-key: "macos-rustdesk"
+      # - name: Rust Cache
+      #   uses: Swatinem/rust-cache@v2
+      #   with:
+      #     # 通过显式指定 target 目录防止增量残留冲突
+      #     shared-key: "macos-rustdesk"
 
       # -------------------------------------------------------------
       # 接下来才是 RustDesk 原本的编译逻辑，例如：
