@@ -884,7 +884,29 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     }
     if (!isWeb) toolbarItems.add(_RecordMenu());
     toolbarItems.add(_CloseMenu(id: widget.id, ffi: widget.ffi));
-    final toolbarBorderRadius = BorderRadius.vertical(bottom: Radius.circular(10.0));
+    final BorderRadius toolbarBorderRadius;
+    switch (edge) {
+      case _ToolbarEdge.top:
+        toolbarBorderRadius = const BorderRadius.vertical(
+          bottom: Radius.circular(10.0),
+        );
+        break;
+      case _ToolbarEdge.bottom:
+        toolbarBorderRadius = const BorderRadius.vertical(
+          top: Radius.circular(10.0),
+        );
+        break;
+      case _ToolbarEdge.left:
+        toolbarBorderRadius = const BorderRadius.horizontal(
+          right: Radius.circular(10.0),
+        );
+        break;
+      case _ToolbarEdge.right:
+        toolbarBorderRadius = const BorderRadius.horizontal(
+          left: Radius.circular(10.0),
+        );
+        break;
+    }
     // innerAxis: how the toolbar icons themselves flow.
     // outerAxis: how the toolbar block and the handle stack against each other
     // (perpendicular to the dock edge, so the handle hangs off the interior face).
@@ -902,9 +924,23 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.08), // Sonoma 关键层
           borderRadius: toolbarBorderRadius,
-          border: Border.all(
-            color: Colors.white.withOpacity(0.18),
-            width: 1,
+          border: Border(
+            top: BorderSide(
+              color: Colors.white.withOpacity(0.18),
+              width: widget.edge.value == _ToolbarEdge.top ? 0 : 1,
+            ),
+            bottom: BorderSide(
+              color: Colors.white.withOpacity(0.18),
+              width: widget.edge.value == _ToolbarEdge.bottom ? 0 : 1,
+            ),
+            left: BorderSide(
+              color: Colors.white.withOpacity(0.18),
+              width: widget.edge.value == _ToolbarEdge.left ? 0 : 1,
+            ),
+            right: BorderSide(
+              color: Colors.white.withOpacity(0.18),
+              width: widget.edge.value == _ToolbarEdge.right ? 0 : 1,
+            ),
           ),
           boxShadow: [
             BoxShadow(
