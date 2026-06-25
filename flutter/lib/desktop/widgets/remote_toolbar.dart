@@ -382,7 +382,7 @@ class _ToolbarTheme {
       decoration: BoxDecoration(
         border: Border.all(
           color: borderColor(context),
-          width: 1,
+          width: 0,
         ),
         borderRadius: borderRadius,
       ),
@@ -778,14 +778,14 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         offstage: _dragging.isTrue,
         child: ClipRRect(
           borderRadius: borderRadius,
-          clipBehavior: Clip.hardEdge,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
+          //clipBehavior: Clip.hardEdge,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.10),
+                color: Colors.white.withOpacity(0.08),
                 border: Border.all(
-                  color: Colors.white.withOpacity(0.12),
+                  color: Colors.white.withOpacity(0.18),
                   width: 1,
                 ),
               ),
@@ -913,8 +913,8 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     final innerAxis = isHorizontal ? Axis.horizontal : Axis.vertical;
     final outerAxis = isHorizontal ? Axis.vertical : Axis.horizontal;
     final spacer = isHorizontal
-        ? SizedBox(width: _ToolbarTheme.buttonHMargin * 4)
-        : SizedBox(height: _ToolbarTheme.buttonHMargin * 4);
+        ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
+        : SizedBox(height: _ToolbarTheme.buttonHMargin * 2);
   final toolbarMaterial = ClipRRect(
     borderRadius: toolbarBorderRadius,
     child: BackdropFilter(
@@ -3493,7 +3493,11 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       data: TextButtonThemeData(style: buttonStyle),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.transparent,
+          color: Theme.of(context)
+              .menuBarTheme
+              .style
+              ?.backgroundColor
+              ?.resolve(MaterialState.values.toSet()),
           border: Border.all(
             color: _ToolbarTheme.borderColor(context),
             width: 1,
