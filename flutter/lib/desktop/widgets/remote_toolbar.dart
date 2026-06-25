@@ -382,7 +382,7 @@ class _ToolbarTheme {
       decoration: BoxDecoration(
         border: Border.all(
           color: borderColor(context),
-          width: 0,
+          width: 1,
         ),
         borderRadius: borderRadius,
       ),
@@ -3495,7 +3495,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
           color: Colors.transparent,  // WU 拖动栏按钮背景
           border: Border.all(
             color: Colors.white.withOpacity(0.18),
-            width: 1,
+            width: 0,
           ),
           borderRadius: widget.borderRadius,
         ),
