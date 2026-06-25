@@ -551,6 +551,45 @@ jobs:
               vcpkg-triplet: arm64-osx,
             }
     steps:
+
+      # ----------------- 1. 缓存 Cargo (Rust 依赖) -----------------
+      - name: Cache Cargo registry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+          # 使用 Lock 文件作为特征值，并区分架构（x86_64 / aarch64）
+          key: ${{ runner.os }}-${{ matrix.job.target }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.job.target }}-cargo-
+
+      # ----------------- 2. 缓存 Cargo Target (增量编译) -----------------
+      - name: Cache Cargo target
+        uses: actions/cache@v4
+        with:
+          path: target
+          key: ${{ runner.os }}-${{ matrix.job.target }}-cargo-target-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.job.target }}-cargo-target-
+
+      # ----------------- 3. 缓存 Flutter / Pub 依赖 -----------------
+      - name: Cache Flutter Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            .dart_tool
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
+
+      # -------------------------------------------------------------
+      # 接下来才是 RustDesk 原本的编译逻辑，例如：
+      # - name: Fetch depends...
+      # - name: Flutter build macos...
+
       - name: Export GitHub Actions cache environment variables
         uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6
         with:
