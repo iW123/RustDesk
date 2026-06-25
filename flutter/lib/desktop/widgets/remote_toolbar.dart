@@ -387,10 +387,10 @@ class _ToolbarTheme {
           filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.10),
+              color: Colors.white.withOpacity(0.10),
               border: Border.all(
                 color: Colors.white.withOpacity(0.08),
-                width: 3,
+                width: 1,
               ),
             ),
             child: child,
@@ -787,11 +787,17 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       return Offstage(
         offstage: _dragging.isTrue,
         child: ClipRRect(
+          borderRadius: borderRadius,
+          clipBehavior: Clip.hardEdge,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.10),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.12),
+                  width: 1,
+                ),
               ),
               child: _DraggableShowHide(
                 id: widget.id,
@@ -895,8 +901,8 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     final innerAxis = isHorizontal ? Axis.horizontal : Axis.vertical;
     final outerAxis = isHorizontal ? Axis.vertical : Axis.horizontal;
     final spacer = isHorizontal
-        ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
-        : SizedBox(height: _ToolbarTheme.buttonHMargin * 2);
+        ? SizedBox(width: _ToolbarTheme.buttonHMargin * 4)
+        : SizedBox(height: _ToolbarTheme.buttonHMargin * 4);
   final toolbarMaterial = ClipRRect(
     borderRadius: toolbarBorderRadius,
     child: BackdropFilter(
@@ -3363,6 +3369,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
     final ButtonStyle buttonStyle = ButtonStyle(
       minimumSize: MaterialStateProperty.all(const Size(0, 0)),
       padding: MaterialStateProperty.all(EdgeInsets.zero),
+      backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
     );
     final isFullscreen = stateGlobal.fullscreen;
     const double iconSize = 20;
