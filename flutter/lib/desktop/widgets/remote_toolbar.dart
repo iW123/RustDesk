@@ -3411,7 +3411,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
             if (states.contains(MaterialState.hovered)) {
               return (bgColor ?? hoverColor).withOpacity(0.15);
             }
-            return const MaterialStatePropertyAll(Colors.transparent);
+            return Colors.transparent;
           }),
         ),
       );
@@ -3493,7 +3493,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       data: TextButtonThemeData(style: buttonStyle),
       child: Container(
         decoration: BoxDecoration(
-          color: const MaterialStatePropertyAll(Colors.transparent),
+          color: MaterialStatePropertyAll(Colors.transparent),
           border: Border.all(
             color: _ToolbarTheme.borderColor(context),
             width: 1,
