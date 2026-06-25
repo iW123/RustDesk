@@ -784,7 +784,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.08),
-                border: Border(
+                border: Border.all(
                   color: Colors.white.withOpacity(0.18),
                   width: 0,
                 ),
