@@ -776,7 +776,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       final borderRadius = _collapseHandleBorderRadius(edge);
       return Offstage(
         offstage: _dragging.isTrue,
-        child: ClipRRect(
+        child: ClipRRect(  // WU 拖动栏
           borderRadius: borderRadius,
           //clipBehavior: Clip.hardEdge,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
           child: BackdropFilter(
@@ -784,9 +784,9 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.08),
-                border: Border.all(
+                border: Border(
                   color: Colors.white.withOpacity(0.18),
-                  width: 1,
+                  width: 0,
                 ),
               ),
               child: _DraggableShowHide(
@@ -915,14 +915,13 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     final spacer = isHorizontal
         ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
         : SizedBox(height: _ToolbarTheme.buttonHMargin * 2);
-  final toolbarMaterial = ClipRRect(
+  final toolbarMaterial = ClipRRect(  // WU 工具栏
     borderRadius: toolbarBorderRadius,
     child: BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
       child: Container(
-        
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.08), // Sonoma 关键层
+          color: Colors.white.withOpacity(0.08),  // WU Sonoma 关键层
           borderRadius: toolbarBorderRadius,
           border: Border(
             top: BorderSide(
@@ -998,12 +997,12 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       ),
       menuBarTheme: MenuBarThemeData(
         style: MenuStyle(
-          padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-          elevation: const MaterialStatePropertyAll(0),
-          backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
-          surfaceTintColor: const MaterialStatePropertyAll(Colors.transparent),
-          shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-          shape: const MaterialStatePropertyAll(BeveledRectangleBorder()),
+          padding: MaterialStatePropertyAll(EdgeInsets.zero),
+          elevation: MaterialStatePropertyAll(0),
+          backgroundColor: MaterialStatePropertyAll(Colors.transparent),
+          surfaceTintColor: MaterialStatePropertyAll(Colors.transparent),
+          shadowColor: MaterialStatePropertyAll(Colors.transparent),
+          shape: MaterialStatePropertyAll(BeveledRectangleBorder()),
         ),
       ),
     );
@@ -3395,7 +3394,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
     final ButtonStyle buttonStyle = ButtonStyle(
       minimumSize: MaterialStateProperty.all(const Size(0, 0)),
       padding: MaterialStateProperty.all(EdgeInsets.zero),
-      backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
+      backgroundColor: MaterialStatePropertyAll(Colors.transparent),
     );
     final isFullscreen = stateGlobal.fullscreen;
     const double iconSize = 20;
@@ -3411,7 +3410,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
             if (states.contains(MaterialState.hovered)) {
               return (bgColor ?? hoverColor).withOpacity(0.15);
             }
-            return Colors.transparent;
+            return bgColor;
           }),
         ),
       );
@@ -3493,14 +3492,10 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       data: TextButtonThemeData(style: buttonStyle),
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context)
-              .menuBarTheme
-              .style
-              ?.backgroundColor
-              ?.resolve(MaterialState.values.toSet()),
+          color: Colors.transparent,
           border: Border.all(
             color: _ToolbarTheme.borderColor(context),
-            width: 1,
+            width: 0,
           ),
           borderRadius: widget.borderRadius,
         ),
