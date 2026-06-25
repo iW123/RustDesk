@@ -786,7 +786,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
                 color: Colors.white.withOpacity(0.08),
                 border: Border.all(
                   color: Colors.white.withOpacity(0.18),
-                  width: 1,
+                  width: 0,
                 ),
               ),
               child: _DraggableShowHide(
@@ -922,7 +922,6 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.08),  // WU Sonoma 关键层
-          borderRadius: toolbarBorderRadius,
           border: Border(
             top: BorderSide(
               color: Colors.white.withOpacity(0.18),
@@ -941,6 +940,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
               width: edge == _ToolbarEdge.right ? 0 : 1,
             ),
           ),
+          borderRadius: toolbarBorderRadius,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.182),
