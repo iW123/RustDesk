@@ -3493,7 +3493,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       data: TextButtonThemeData(style: buttonStyle),
       child: Container(
         decoration: BoxDecoration(
-          color: MaterialStatePropertyAll(Colors.transparent),
+          color: Colors.transparent,
           border: Border.all(
             color: _ToolbarTheme.borderColor(context),
             width: 1,
