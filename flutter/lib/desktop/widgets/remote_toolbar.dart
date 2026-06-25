@@ -390,7 +390,7 @@ class _ToolbarTheme {
               color: Colors.white.withOpacity(0.10),
               border: Border.all(
                 color: Colors.white.withOpacity(0.08),
-                width: 1,
+                width: 5,
               ),
             ),
             child: child,
