@@ -376,29 +376,19 @@ class _ToolbarTheme {
     overlayColor: MaterialStatePropertyAll(Colors.transparent),
   );
 
-    static Widget borderWrapper(
-      BuildContext context,
-      Widget child,
-      BorderRadius borderRadius,
-    ) {
-      return ClipRRect(
-        borderRadius: borderRadius,
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.10),
-              border: Border.all(
-                color: Colors.white.withOpacity(0.08),
-                width: 5,
-              ),
-            ),
-            child: child,
-          ),
+  static Widget borderWrapper(
+      BuildContext context, Widget child, BorderRadius borderRadius) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: borderColor(context),
+          width: 1,
         ),
-      );
-    }
-
+        borderRadius: borderRadius,
+      ),
+      child: child,
+    );
+  }
 }
 
 typedef DismissFunc = void Function();
