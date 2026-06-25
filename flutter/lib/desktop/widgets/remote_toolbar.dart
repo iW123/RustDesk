@@ -927,19 +927,19 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           border: Border(
             top: BorderSide(
               color: Colors.white.withOpacity(0.18),
-              width: widget.edge.value == _ToolbarEdge.top ? 0 : 1,
+              width: edge == _ToolbarEdge.top ? 0 : 1,
             ),
             bottom: BorderSide(
               color: Colors.white.withOpacity(0.18),
-              width: widget.edge.value == _ToolbarEdge.bottom ? 0 : 1,
+              width: edge == _ToolbarEdge.bottom ? 0 : 1,
             ),
             left: BorderSide(
               color: Colors.white.withOpacity(0.18),
-              width: widget.edge.value == _ToolbarEdge.left ? 0 : 1,
+              width: edge == _ToolbarEdge.left ? 0 : 1,
             ),
             right: BorderSide(
               color: Colors.white.withOpacity(0.18),
-              width: widget.edge.value == _ToolbarEdge.right ? 0 : 1,
+              width: edge == _ToolbarEdge.right ? 0 : 1,
             ),
           ),
           boxShadow: [
@@ -3411,7 +3411,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
             if (states.contains(MaterialState.hovered)) {
               return (bgColor ?? hoverColor).withOpacity(0.15);
             }
-            return bgColor;
+            return const MaterialStatePropertyAll(Colors.transparent);
           }),
         ),
       );
@@ -3493,11 +3493,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       data: TextButtonThemeData(style: buttonStyle),
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context)
-              .menuBarTheme
-              .style
-              ?.backgroundColor
-              ?.resolve(MaterialState.values.toSet()),
+          color: const MaterialStatePropertyAll(Colors.transparent),
           border: Border.all(
             color: _ToolbarTheme.borderColor(context),
             width: 1,
