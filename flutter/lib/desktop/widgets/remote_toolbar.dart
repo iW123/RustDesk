@@ -783,7 +783,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.08),
+                color: Colors.white.withOpacity(0.12),
                 border: Border.all(
                   color: Colors.white.withOpacity(0.18),
                   width: 0,
@@ -996,15 +996,13 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         color: _ToolbarTheme.dividerColor(context),
       ),
       menuBarTheme: MenuBarThemeData(
-        style: MenuStyle(
-          padding: MaterialStatePropertyAll(EdgeInsets.zero),
-          elevation: MaterialStatePropertyAll(0),
-          backgroundColor: MaterialStatePropertyAll(Colors.transparent),
-          surfaceTintColor: MaterialStatePropertyAll(Colors.transparent),
-          shadowColor: MaterialStatePropertyAll(Colors.transparent),
-          shape: MaterialStatePropertyAll(BeveledRectangleBorder()),
-        ),
-      ),
+          style: MenuStyle(
+        padding: MaterialStatePropertyAll(EdgeInsets.zero),
+        elevation: MaterialStatePropertyAll(0),
+        shape: MaterialStatePropertyAll(BeveledRectangleBorder()),
+      ).copyWith(
+              backgroundColor:
+                  Theme.of(context).menuBarTheme.style?.backgroundColor)),
     );
   }
 }
