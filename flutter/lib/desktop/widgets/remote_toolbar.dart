@@ -376,29 +376,19 @@ class _ToolbarTheme {
     overlayColor: MaterialStatePropertyAll(Colors.transparent),
   );
 
-    static Widget borderWrapper(
-      BuildContext context,
-      Widget child,
-      BorderRadius borderRadius,
-    ) {
-      return ClipRRect(
-        borderRadius: borderRadius,
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.red.withOpacity(0.08),
-              border: Border.all(
-                color: Colors.white.withOpacity(0.18),
-                width: 0,
-              ),
-            ),
-            child: child,
-          ),
+  static Widget borderWrapper(
+      BuildContext context, Widget child, BorderRadius borderRadius) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: borderColor(context),
+          width: 1,
         ),
-      );
-    }
-
+        borderRadius: borderRadius,
+      ),
+      child: child,
+    );
+  }
 }
 
 typedef DismissFunc = void Function();
@@ -792,7 +782,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.08),
+                color: Colors.red.withOpacity(0.08),
                 border: Border.all(
                   color: Colors.white.withOpacity(0.18),
                   width: 0,
