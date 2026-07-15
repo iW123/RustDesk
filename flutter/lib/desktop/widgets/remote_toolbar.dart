@@ -28,6 +28,8 @@ import './kb_layout_type_chooser.dart';
 import 'package:flutter_hbb/utils/scale.dart';
 import 'package:flutter_hbb/common/widgets/custom_scale_base.dart';
 
+import 'dart:ui';
+
 enum _ToolbarEdge { top, right, bottom, left }
 
 _ToolbarEdge _parseToolbarEdge(String? s) {
@@ -374,19 +376,29 @@ class _ToolbarTheme {
     overlayColor: MaterialStatePropertyAll(Colors.transparent),
   );
 
-  static Widget borderWrapper(
-      BuildContext context, Widget child, BorderRadius borderRadius) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: borderColor(context),
-          width: 1,
-        ),
+    static Widget borderWrapper(
+      BuildContext context,
+      Widget child,
+      BorderRadius borderRadius,
+    ) {
+      return ClipRRect(
         borderRadius: borderRadius,
-      ),
-      child: child,
-    );
-  }
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.08),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.18),
+                width: 1,
+              ),
+            ),
+            child: child,
+          ),
+        ),
+      );
+    }
+
 }
 
 typedef DismissFunc = void Function();
@@ -773,33 +785,60 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       final borderRadius = _collapseHandleBorderRadius(edge);
       return Offstage(
         offstage: _dragging.isTrue,
-        child: Material(
-          elevation: _ToolbarTheme.elevation,
-          shadowColor: MyTheme.color(context).shadow,
+        child: ClipRRect(  // WU 拖动栏
           borderRadius: borderRadius,
-          child: _DraggableShowHide(
-            id: widget.id,
-            ffi: widget.ffi,
-            sessionId: widget.ffi.sessionId,
-            dragging: _dragging,
-            fraction: _fraction,
-            edge: _edge,
-            previewEdge: _previewEdge,
-            previewFraction: _previewFraction,
-            toolbarSize: _toolbarSize,
-            markDragEpoch: _markToolbarDragEpoch,
-            syncDockingOptionsAfterDragIfNeeded:
-                _syncDockingOptionsAfterDragIfNeeded,
-            isHorizontal: isHorizontal,
-            multiEdgeEnabled: _multiEdgeEnabled.value,
-            toolbarState: widget.state,
-            setFullscreen: _setFullscreen,
-            setMinimize: _minimize,
-            borderRadius: borderRadius,
+          //clipBehavior: Clip.hardEdge,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.08),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.18),
+                  width: 0,
+                ),
+              ),
+              child: _DraggableShowHide(
+                id: widget.id,
+                ffi: widget.ffi,
+                sessionId: widget.ffi.sessionId,
+                dragging: _dragging,
+                fraction: _fraction,
+                edge: _edge,
+                previewEdge: _previewEdge,
+                previewFraction: _previewFraction,
+                toolbarSize: _toolbarSize,
+                markDragEpoch: _markToolbarDragEpoch,
+                syncDockingOptionsAfterDragIfNeeded:
+                    _syncDockingOptionsAfterDragIfNeeded,
+                isHorizontal: isHorizontal,
+                multiEdgeEnabled: _multiEdgeEnabled.value,
+                toolbarState: widget.state,
+                setFullscreen: _setFullscreen,
+                setMinimize: _minimize,
+                borderRadius: borderRadius,
+              ),
+            ),
           ),
         ),
       );
     });
+  }
+
+  Widget _buildMacosGrip() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 6, bottom: 6),
+      child: Center(
+        child: Container(
+          width: 36,
+          height: 5,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.22),
+            borderRadius: BorderRadius.circular(3),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildToolbar(
@@ -854,7 +893,29 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     }
     if (!isWeb) toolbarItems.add(_RecordMenu());
     toolbarItems.add(_CloseMenu(id: widget.id, ffi: widget.ffi));
-    final toolbarBorderRadius = BorderRadius.all(Radius.circular(4.0));
+    final BorderRadius toolbarBorderRadius;
+    switch (edge) {
+      case _ToolbarEdge.top:
+        toolbarBorderRadius = const BorderRadius.vertical(
+          bottom: Radius.circular(10.0),
+        );
+        break;
+      case _ToolbarEdge.bottom:
+        toolbarBorderRadius = const BorderRadius.vertical(
+          top: Radius.circular(10.0),
+        );
+        break;
+      case _ToolbarEdge.left:
+        toolbarBorderRadius = const BorderRadius.horizontal(
+          right: Radius.circular(10.0),
+        );
+        break;
+      case _ToolbarEdge.right:
+        toolbarBorderRadius = const BorderRadius.horizontal(
+          left: Radius.circular(10.0),
+        );
+        break;
+    }
     // innerAxis: how the toolbar icons themselves flow.
     // outerAxis: how the toolbar block and the handle stack against each other
     // (perpendicular to the dock edge, so the handle hangs off the interior face).
@@ -863,34 +924,54 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     final spacer = isHorizontal
         ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
         : SizedBox(height: _ToolbarTheme.buttonHMargin * 2);
-    final toolbarMaterial = Material(
-      elevation: _ToolbarTheme.elevation,
-      shadowColor: MyTheme.color(context).shadow,
-      borderRadius: toolbarBorderRadius,
-      color: Theme.of(context)
-          .menuBarTheme
-          .style
-          ?.backgroundColor
-          ?.resolve(MaterialState.values.toSet()),
-      child: SingleChildScrollView(
-        scrollDirection: innerAxis,
-        child: Theme(
-          data: themeData(),
-          child: _ToolbarTheme.borderWrapper(
-              context,
-              Flex(
+  final toolbarMaterial = ClipRRect(  // WU 工具栏
+    borderRadius: toolbarBorderRadius,
+    child: BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.08),  // WU Sonoma 关键层
+          border: Border(
+            top: BorderSide(
+              color: Colors.white.withOpacity(0.18),
+              width: edge == _ToolbarEdge.top ? 0 : 1,
+            ),
+            bottom: BorderSide(
+              color: Colors.white.withOpacity(0.18),
+              width: edge == _ToolbarEdge.bottom ? 0 : 1,
+            ),
+            left: BorderSide(
+              color: Colors.white.withOpacity(0.18),
+              width: edge == _ToolbarEdge.left ? 0 : 1,
+            ),
+            right: BorderSide(
+              color: Colors.white.withOpacity(0.18),
+              width: edge == _ToolbarEdge.right ? 0 : 1,
+            ),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.182),
+              blurRadius: 40,
+                spreadRadius: 1,
+              offset: const Offset(0, 16),
+            ),
+          ],
+        ),
+        child: SingleChildScrollView(
+          scrollDirection: innerAxis,
+          child: Theme(
+            data: themeData(),
+            child: Flex(
                 direction: innerAxis,
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  spacer,
-                  ...toolbarItems,
-                  spacer,
-                ],
-              ),
-              toolbarBorderRadius),
-        ),
+                children: [spacer, ...toolbarItems, spacer],
+                  )
+            ),
+          ),
       ),
-    );
+    ),
+  );
     final handle = _buildDraggableCollapse(context, edge, isHorizontal);
     // The handle hangs off the interior face of the toolbar (away from the
     // docked edge), centered along that face by the Flex's default cross-axis
@@ -923,13 +1004,15 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         color: _ToolbarTheme.dividerColor(context),
       ),
       menuBarTheme: MenuBarThemeData(
-          style: MenuStyle(
-        padding: MaterialStatePropertyAll(EdgeInsets.zero),
-        elevation: MaterialStatePropertyAll(0),
-        shape: MaterialStatePropertyAll(BeveledRectangleBorder()),
-      ).copyWith(
-              backgroundColor:
-                  Theme.of(context).menuBarTheme.style?.backgroundColor)),
+        style: MenuStyle(
+          padding: MaterialStatePropertyAll(EdgeInsets.zero),
+          elevation: MaterialStatePropertyAll(0),
+          backgroundColor: MaterialStatePropertyAll(Colors.transparent),
+          surfaceTintColor: MaterialStatePropertyAll(Colors.transparent),
+          shadowColor: MaterialStatePropertyAll(Colors.transparent),
+          shape: MaterialStatePropertyAll(BeveledRectangleBorder()),
+        ),
+      ),
     );
   }
 }
@@ -3319,6 +3402,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
     final ButtonStyle buttonStyle = ButtonStyle(
       minimumSize: MaterialStateProperty.all(const Size(0, 0)),
       padding: MaterialStateProperty.all(EdgeInsets.zero),
+      backgroundColor: MaterialStatePropertyAll(Colors.transparent),
     );
     final isFullscreen = stateGlobal.fullscreen;
     const double iconSize = 20;
@@ -3416,20 +3500,16 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       data: TextButtonThemeData(style: buttonStyle),
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context)
-              .menuBarTheme
-              .style
-              ?.backgroundColor
-              ?.resolve(MaterialState.values.toSet()),
+          color: Colors.transparent,  // WU 拖动栏按钮背景
           border: Border.all(
-            color: _ToolbarTheme.borderColor(context),
-            width: 1,
+            color: Colors.white.withOpacity(0.18),
+            width: 0,
           ),
           borderRadius: widget.borderRadius,
         ),
         child: SizedBox(
-          height: widget.isHorizontal ? 20 : null,
-          width: widget.isHorizontal ? null : 20,
+          height: widget.isHorizontal ? 24 : null,
+          width: widget.isHorizontal ? null : 24,
           child: child,
         ),
       ),
