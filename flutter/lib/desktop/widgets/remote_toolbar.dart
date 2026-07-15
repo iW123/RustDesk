@@ -3445,6 +3445,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
                       ? Icons.fullscreen_exit
                       : Icons.fullscreen,
                   size: iconSize,
+                  color: Colors.white,
                 ),
               ),
             )),
@@ -3458,6 +3459,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
                     child: Icon(
                       Icons.remove,
                       size: iconSize,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -3472,6 +3474,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
                 child: Icon(
                   _toolbarCollapseIcon(widget.edge.value, collapse.isTrue),
                   size: iconSize,
+                  color: Colors.white,
                 ),
               ))),
         ),
