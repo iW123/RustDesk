@@ -387,7 +387,7 @@ class _ToolbarTheme {
           filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.08),
+              color: Colors.red.withOpacity(0.08),
               border: Border.all(
                 color: Colors.white.withOpacity(0.18),
                 width: 0,
@@ -825,22 +825,6 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     });
   }
 
-  Widget _buildMacosGrip() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 6, bottom: 6),
-      child: Center(
-        child: Container(
-          width: 36,
-          height: 5,
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.22),
-            borderRadius: BorderRadius.circular(3),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _buildToolbar(
       BuildContext context, _ToolbarEdge edge, bool isHorizontal) {
     final List<Widget> toolbarItems = [];
@@ -952,9 +936,9 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.182),
-              blurRadius: 40,
+              blurRadius: 20,
                 spreadRadius: 1,
-              offset: const Offset(0, 16),
+              offset: const Offset(0, 12),
             ),
           ],
         ),
