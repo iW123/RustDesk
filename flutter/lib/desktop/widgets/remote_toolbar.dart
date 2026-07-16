@@ -907,25 +907,25 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           color: Colors.red.withOpacity(0.08),  // WU Sonoma 关键层
           border: Border(
             top: BorderSide(
-              color: Colors.red.withOpacity(0.8),
+              color: Colors.white.withOpacity(0.18),
               width: edge == _ToolbarEdge.top ? 0 : 1,
             ),
             bottom: BorderSide(
-              color: Colors.red.withOpacity(0.8),
+              color: Colors.white.withOpacity(0.18),
               width: edge == _ToolbarEdge.bottom ? 0 : 1,
             ),
             left: BorderSide(
-              color: Colors.red.withOpacity(0.8),
+              color: Colors.white.withOpacity(0.18),
               width: edge == _ToolbarEdge.left ? 0 : 1,
             ),
             right: BorderSide(
-              color: Colors.red.withOpacity(0.8),
+              color: Colors.white.withOpacity(0.18),
               width: edge == _ToolbarEdge.right ? 0 : 1,
             ),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.red.withOpacity(0.58),
+              color: Colors.black.withOpacity(0.58),
               blurRadius: 20,
                 spreadRadius: 1,
               offset: const Offset(0, 12),
