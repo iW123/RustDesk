@@ -381,7 +381,7 @@ class _ToolbarTheme {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
-          color: borderColor(context),
+          color: Colors.green.withOpacity(0.8),
           width: 1,
         ),
         borderRadius: borderRadius,
@@ -782,10 +782,10 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.38),
+                color: Colors.red.withOpacity(0.08),
                 border: Border.all(
                   color: Colors.green.withOpacity(0.8),
-                  width: 1,
+                  width: 0,
                 ),
               ),
               child: _DraggableShowHide(
@@ -904,7 +904,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.blue.withOpacity(0.38),  // WU Sonoma 关键层
+          color: Colors.red.withOpacity(0.38),  // WU Sonoma 关键层
           border: Border(
             top: BorderSide(
               color: Colors.red.withOpacity(0.8),
@@ -925,7 +925,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.red.withOpacity(0.182),
+              color: Colors.red.withOpacity(0.58),
               blurRadius: 20,
                 spreadRadius: 1,
               offset: const Offset(0, 12),
