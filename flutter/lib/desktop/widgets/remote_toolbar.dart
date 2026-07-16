@@ -3479,8 +3479,8 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
         decoration: BoxDecoration(
           color: Colors.transparent,  // WU 拖动栏按钮背景
           border: Border.all(
-            color: Colors.white.withOpacity(0.8),
-            width: 0,
+            color: Colors.red.withOpacity(0.8),
+            width: 1,
           ),
           borderRadius: widget.borderRadius,
         ),
