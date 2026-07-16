@@ -782,7 +782,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.8),
+                color: Colors.red.withOpacity(0.08),
                 border: Border.all(
                   color: Colors.green.withOpacity(0.8),
                   width: 0,
@@ -925,7 +925,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.58),
+              color: Colors.yellow.withOpacity(0.58),
               blurRadius: 20,
                 spreadRadius: 1,
               offset: const Offset(0, 12),
