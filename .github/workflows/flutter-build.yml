@@ -194,6 +194,8 @@ jobs:
 
       - name: Codesign app
         run: |
+          # 清除隔离属性
+          sudo xattr -rd com.apple.quarantine ./flutter/build/macos/Build/Products/Release/RustDesk.app || true
           # 使用 --deep 和最高权限重签
           codesign --force --deep --sign - ./flutter/build/macos/Build/Products/Release/RustDesk.app
 
