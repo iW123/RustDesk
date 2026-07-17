@@ -895,9 +895,8 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
         : SizedBox(height: _ToolbarTheme.buttonHMargin * 2);
   final toolbarMaterial = ClipRRect(  //MARK: WU 工具栏
+    borderRadius: toolbarBorderRadius,
     child: BackdropFilter(
-      borderRadius: toolbarBorderRadius,
-      clipBehavior: Clip.antiAlias,
       filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
       child: Container(
         decoration: BoxDecoration(
