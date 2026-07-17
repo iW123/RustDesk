@@ -905,24 +905,24 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           //     color: Colors.white.withOpacity(0.8),
           //     width: 1,
           // ),
-          border: Border(
-            top: BorderSide(
-              color: Colors.white.withOpacity(0.8),
-              width: edge == _ToolbarEdge.top ? 0 : 1,
-            ),
-            bottom: BorderSide(
-              color: Colors.white.withOpacity(0.8),
-              width: edge == _ToolbarEdge.bottom ? 0 : 1,
-            ),
-            left: BorderSide(
-              color: Colors.white.withOpacity(0.8),
-              width: edge == _ToolbarEdge.left ? 0 : 1,
-            ),
-            right: BorderSide(
-              color: Colors.white.withOpacity(0.8),
-              width: edge == _ToolbarEdge.right ? 0 : 1,
-            ),
-          ),
+          // border: Border(
+          //   top: BorderSide(
+          //     color: Colors.white.withOpacity(0.8),
+          //     width: edge == _ToolbarEdge.top ? 0 : 1,
+          //   ),
+          //   bottom: BorderSide(
+          //     color: Colors.white.withOpacity(0.8),
+          //     width: edge == _ToolbarEdge.bottom ? 0 : 1,
+          //   ),
+          //   left: BorderSide(
+          //     color: Colors.white.withOpacity(0.8),
+          //     width: edge == _ToolbarEdge.left ? 0 : 1,
+          //   ),
+          //   right: BorderSide(
+          //     color: Colors.white.withOpacity(0.8),
+          //     width: edge == _ToolbarEdge.right ? 0 : 1,
+          //   ),
+          // ),
           borderRadius: toolbarBorderRadius,
           // boxShadow: [
           //   BoxShadow(
