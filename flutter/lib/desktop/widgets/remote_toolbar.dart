@@ -350,8 +350,8 @@ class _ToolbarTheme {
 
   static double menuBorderRadius = isWindows ? 5.0 : 7.0;
   static EdgeInsets menuPadding = isWindows
-      ? EdgeInsets.fromLTRB(4, 12, 4, 12)
-      : EdgeInsets.fromLTRB(6, 14, 6, 14);
+      ? EdgeInsets.fromLTRB(6, 8, 6, 8)
+      : EdgeInsets.fromLTRB(6, 10, 6, 10);
   static const double menuButtonBorderRadius = 3.0;
 
   static Color borderColor(BuildContext context) =>
@@ -779,7 +779,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           borderRadius: borderRadius,
           clipBehavior: Clip.antiAlias,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+            filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.transparent,
