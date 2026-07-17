@@ -923,6 +923,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
               width: edge == _ToolbarEdge.right ? 0 : 1,
             ),
           ),
+          borderRadius: toolbarBorderRadius,
           // boxShadow: [
           //   BoxShadow(
           //     color: Colors.yellow.withOpacity(0.58),
