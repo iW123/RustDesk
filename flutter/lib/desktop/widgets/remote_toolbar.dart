@@ -341,7 +341,7 @@ class _ToolbarTheme {
   static const double dividerHeight = 12.0;
 
   static const double buttonSize = 32;
-  static const double buttonHMargin = 2;
+  static const double buttonHMargin = 6;
   static const double buttonVMargin = 6;
   static const double iconRadius = 6;
   static const double elevation = 3;
