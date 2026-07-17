@@ -343,7 +343,7 @@ class _ToolbarTheme {
   static const double buttonSize = 32;
   static const double buttonHMargin = 2;
   static const double buttonVMargin = 6;
-  static const double iconRadius = 8;
+  static const double iconRadius = 6;
   static const double elevation = 3;
 
   static double dividerSpaceToAction = isWindows ? 8 : 14;
@@ -775,9 +775,9 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       final borderRadius = _collapseHandleBorderRadius(edge);
       return Offstage(
         offstage: _dragging.isTrue,
-        child: ClipRRect(  // WU 拖动栏
+        child: ClipRRect(  //MARK: WU 拖动栏
           borderRadius: borderRadius,
-          //clipBehavior: Clip.hardEdge,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
+          clipBehavior: Clip.hardEdge,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
@@ -898,8 +898,9 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     final spacer = isHorizontal
         ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
         : SizedBox(height: _ToolbarTheme.buttonHMargin * 2);
-  final toolbarMaterial = ClipRRect(  // WU 工具栏
+  final toolbarMaterial = ClipRRect(  //MARK: WU 工具栏
     borderRadius: toolbarBorderRadius,
+    clipBehavior: Clip.antiAlias,
     child: BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
       child: Container(
@@ -907,19 +908,19 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           color: Colors.red.withOpacity(0.08),  // WU Sonoma 关键层
           border: Border(
             top: BorderSide(
-              color: Colors.white.withOpacity(0.18),
+              color: Colors.white.withOpacity(0.8),
               width: edge == _ToolbarEdge.top ? 0 : 1,
             ),
             bottom: BorderSide(
-              color: Colors.white.withOpacity(0.18),
+              color: Colors.white.withOpacity(0.8),
               width: edge == _ToolbarEdge.bottom ? 0 : 1,
             ),
             left: BorderSide(
-              color: Colors.white.withOpacity(0.18),
+              color: Colors.white.withOpacity(0.8),
               width: edge == _ToolbarEdge.left ? 0 : 1,
             ),
             right: BorderSide(
-              color: Colors.white.withOpacity(0.18),
+              color: Colors.white.withOpacity(0.8),
               width: edge == _ToolbarEdge.right ? 0 : 1,
             ),
           ),
@@ -3477,7 +3478,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       data: TextButtonThemeData(style: buttonStyle),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.transparent,  // WU 拖动栏按钮背景
+          color: Colors.transparent,  //MARK: WU 拖动栏按钮背景
           border: Border.all(
             color: Colors.red.withOpacity(0.8),
             width: 0,
