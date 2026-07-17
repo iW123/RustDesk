@@ -784,7 +784,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.08),
                 border: Border.all(
-                  color: Colors.white.withOpacity(0.18),
+                  color: Colors.red.withOpacity(0.18),
                   width: 1,
                 ),
               ),
@@ -3482,7 +3482,11 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       data: TextButtonThemeData(style: buttonStyle),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.transparent,  //MARK: WU 拖动栏按钮背景
+          color: Colors.red,  //MARK: WU 拖动栏按钮背景
+          border: Border.all(
+            color: Colors.blue.withOpacity(0.18),
+            width: 1,
+          ),
           borderRadius: widget.borderRadius,
         ),
         child: SizedBox(
