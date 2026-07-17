@@ -350,8 +350,8 @@ class _ToolbarTheme {
 
   static double menuBorderRadius = isWindows ? 5.0 : 7.0;
   static EdgeInsets menuPadding = isWindows
-      ? EdgeInsets.fromLTRB(6, 8, 6, 8)
-      : EdgeInsets.fromLTRB(6, 10, 6, 10);
+      ? EdgeInsets.fromLTRB(6, 18, 6, 18)
+      : EdgeInsets.fromLTRB(6, 20, 6, 20);
   static const double menuButtonBorderRadius = 3.0;
 
   static Color borderColor(BuildContext context) =>
@@ -3482,9 +3482,9 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       data: TextButtonThemeData(style: buttonStyle),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.red,  //MARK: WU 拖动栏按钮背景
+          color: Colors.transparent,  //MARK: WU 拖动栏按钮背景
           border: Border.all(
-            color: Colors.blue.withOpacity(0.18),
+            color: Colors.red.withOpacity(0.8),
             width: 1,
           ),
           borderRadius: widget.borderRadius,
