@@ -777,16 +777,12 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         offstage: _dragging.isTrue,
         child: ClipRRect(  //MARK: WU 拖动栏
           borderRadius: borderRadius,
-          clipBehavior: Clip.hardEdge,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
+          clipBehavior: Clip.antiAlias,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0),
-                border: Border.all(
-                  color: Colors.green.withOpacity(0.8),
-                  width: 0,
-                ),
+                color: Colors.transparent,
               ),
               child: _DraggableShowHide(
                 id: widget.id,
@@ -899,13 +895,17 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
         : SizedBox(height: _ToolbarTheme.buttonHMargin * 2);
   final toolbarMaterial = ClipRRect(  //MARK: WU 工具栏
-    borderRadius: toolbarBorderRadius,
-    clipBehavior: Clip.antiAlias,
     child: BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.red.withOpacity(0.08),  // WU Sonoma 关键层
+          // border: Border.all(
+          //     color: Colors.white.withOpacity(0.8),
+          //     width: 1,
+          // ),
+          borderRadius: toolbarBorderRadius,
+          clipBehavior: Clip.antiAlias,
           border: Border(
             top: BorderSide(
               color: Colors.white.withOpacity(0.8),
@@ -3479,10 +3479,6 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.transparent,  //MARK: WU 拖动栏按钮背景
-          border: Border.all(
-            color: Colors.red.withOpacity(0.8),
-            width: 0,
-          ),
           borderRadius: widget.borderRadius,
         ),
         child: SizedBox(
