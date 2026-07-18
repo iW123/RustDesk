@@ -347,7 +347,7 @@ class _ToolbarTheme {
   static const double dividerHeight = 12.0;
 
   static const double buttonSize = 40;
-  static const double buttonHMargin = 2;
+  static const double buttonHMargin = 6;
   static const double buttonVMargin = 6;
   static const double iconRadius = 10;
   static const double elevation = 3;
@@ -787,6 +787,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
               child: Material(
+                color: Colors.white.withOpacity(0.08),
               borderRadius: borderRadius,
               child: _DraggableShowHide(
                 id: widget.id,
