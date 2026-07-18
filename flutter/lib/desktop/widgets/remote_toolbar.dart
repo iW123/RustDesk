@@ -789,7 +789,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Material(
                 color: Colors.red.withOpacity(0.08),
-                borderRadius: widget.borderRadius,
+                borderRadius: BorderRadius.circular(12),
               child: _DraggableShowHide(
                 id: widget.id,
                 ffi: widget.ffi,
