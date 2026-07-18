@@ -342,7 +342,7 @@ class _ToolbarTheme {
 
   static const double buttonSize = 32;
   static const double buttonHMargin = 6;
-  static const double buttonVMargin = 10;
+  static const double buttonVMargin = 15;
   static const double iconRadius = 6;
   static const double elevation = 3;
 
@@ -782,9 +782,9 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.08),
+                color: Colors.green.withOpacity(0.8),
                 border: Border.all(
-                  color: Colors.red.withOpacity(0.18),
+                  color: Colors.red.withOpacity(0.8),
                   width: 1,
                 ),
               ),
@@ -931,7 +931,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           // boxShadow: [
           //   BoxShadow(
           //     color: Colors.yellow.withOpacity(0.58),
-          //     blurRadius: 20,
+          //     blurRadius: 30,
           //       spreadRadius: 1,
           //     offset: const Offset(0, 12),
           //   ),
