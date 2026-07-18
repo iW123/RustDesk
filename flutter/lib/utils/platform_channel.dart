@@ -20,13 +20,6 @@ class RdPlatformChannel {
     _hostMethodChannel.setMethodCallHandler((call) async {
       switch (call.method) {
         case "switchHide":
-        showDialog(
-          context: navigatorKey.currentContext!,
-          builder: (_) => const AlertDialog(
-            title: Text("Debug"),
-            content: Text("switchHide received"),
-          ),
-        );
           for (final state in ToolbarState.states.values) {
             if (state.sessionId != null) {
               state.switchHide(state.sessionId!);
