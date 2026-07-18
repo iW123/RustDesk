@@ -783,12 +783,10 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       return Offstage(
         offstage: _dragging.isTrue,
         child: ClipRRect(  //MARK: WU 拖动栏
-          clipBehavior: Clip.antiAlias,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
+          clipBehavior: Clip.antiAlias,
           child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
               child: Material(
-              elevation: _ToolbarTheme.elevation,
-              shadowColor: MyTheme.color(context).shadow,
               borderRadius: borderRadius,
               child: _DraggableShowHide(
                 id: widget.id,
