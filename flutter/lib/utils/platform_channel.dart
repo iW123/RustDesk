@@ -20,6 +20,8 @@ class RdPlatformChannel {
     _hostMethodChannel.setMethodCallHandler((call) async {
       switch (call.method) {
         case "switchHide":
+          File('/tmp/rustdesk_switchHide.log')
+              .writeAsStringSync('received\n');
           for (final state in ToolbarState.states.values) {
             if (state.sessionId != null) {
               state.switchHide(state.sessionId!);
