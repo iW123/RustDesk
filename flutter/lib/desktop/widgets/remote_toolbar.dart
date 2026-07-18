@@ -346,7 +346,7 @@ class _ToolbarTheme {
   static const double height = 20.0;
   static const double dividerHeight = 12.0;
 
-  static const double buttonSize = 42;
+  static const double buttonSize = 32;
   static const double buttonHMargin = 6;
   static const double buttonVMargin = 6;
   static const double iconRadius = 10;
@@ -783,13 +783,13 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       return Offstage(
         offstage: _dragging.isTrue,
         child: ClipRRect(  //MARK: WU 拖动栏
-          borderRadius: borderRadius,
           clipBehavior: Clip.antiAlias,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
-            child: Material(
-                color: Colors.red.withOpacity(0.08),
-                borderRadius: BorderRadius.circular(12),
+              filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+              child: Material(
+              elevation: _ToolbarTheme.elevation,
+              shadowColor: MyTheme.color(context).shadow,
+              borderRadius: borderRadius,
               child: _DraggableShowHide(
                 id: widget.id,
                 ffi: widget.ffi,
@@ -899,13 +899,13 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     final outerAxis = isHorizontal ? Axis.vertical : Axis.horizontal;
     final spacer = isHorizontal
         ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
-        : SizedBox(height: _ToolbarTheme.buttonHMargin * 4);
+        : SizedBox(height: _ToolbarTheme.buttonHMargin * 8);
   final toolbarMaterial = ClipRRect(  //MARK: WU 工具栏
     borderRadius: toolbarBorderRadius,
     child: BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
       child: Material(
-          color: Colors.red.withOpacity(0.08),  // WU Sonoma 关键层
+          color: Colors.red.withOpacity(0.08),
           // border: Border.all(
           //     color: Colors.white.withOpacity(0.8),
           //     width: 1,
@@ -3483,10 +3483,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.transparent,  //MARK: WU 拖动栏按钮背景
-          border: Border.all(
-              color: Colors.red.withOpacity(0.8),
-              width: 1,
-          ),
+
           borderRadius: widget.borderRadius,
         ),
         child: SizedBox(
