@@ -346,9 +346,9 @@ class _ToolbarTheme {
   static const double height = 20.0;
   static const double dividerHeight = 12.0;
 
-  static const double buttonSize = 38;
-  static const double buttonHMargin = 10;
-  static const double buttonVMargin = 10;
+  static const double buttonSize = 42;
+  static const double buttonHMargin = 6;
+  static const double buttonVMargin = 6;
   static const double iconRadius = 10;
   static const double elevation = 3;
 
@@ -901,7 +901,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     final outerAxis = isHorizontal ? Axis.vertical : Axis.horizontal;
     final spacer = isHorizontal
         ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
-        : SizedBox(height: _ToolbarTheme.buttonHMargin * 2);
+        : SizedBox(height: _ToolbarTheme.buttonHMargin * 4);
   final toolbarMaterial = ClipRRect(  //MARK: WU 工具栏
     borderRadius: toolbarBorderRadius,
     child: BackdropFilter(
