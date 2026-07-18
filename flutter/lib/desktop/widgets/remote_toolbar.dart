@@ -341,9 +341,9 @@ class _ToolbarTheme {
   static const double dividerHeight = 12.0;
 
   static const double buttonSize = 32;
-  static const double buttonHMargin = 6;
-  static const double buttonVMargin = 15;
-  static const double iconRadius = 6;
+  static const double buttonHMargin = 10;
+  static const double buttonVMargin = 10;
+  static const double iconRadius = 10;
   static const double elevation = 3;
 
   static double dividerSpaceToAction = isWindows ? 8 : 14;
@@ -381,7 +381,7 @@ class _ToolbarTheme {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
-          color: borderColor(context),
+          color: Colors.red,
           width: 1,
         ),
         borderRadius: borderRadius,
@@ -3483,10 +3483,6 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.transparent,  //MARK: WU 拖动栏按钮背景
-          border: Border.all(
-            color: Colors.red.withOpacity(0.8),
-            width: 1,
-          ),
           borderRadius: widget.borderRadius,
         ),
         child: SizedBox(
