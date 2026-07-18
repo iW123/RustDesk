@@ -86,7 +86,12 @@ class MainFlutterWindow: NSWindow {
     }
 
     @objc func WSToggleToolbar() {
-        print("Hide Toolbar")
+        let alert = NSAlert()
+        alert.messageText = "Hide Toolbar"
+        alert.informativeText = "switchHide clicked"
+        alert.alertStyle = .informational
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
         WSRustdeskChannel?.invokeMethod(
             "switchHide",
             arguments: nil
