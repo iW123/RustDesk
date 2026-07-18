@@ -16,6 +16,20 @@ class RdPlatformChannel {
   final MethodChannel _hostMethodChannel =
       MethodChannel("org.rustdesk.rustdesk/host");
 
+  RdPlatformChannel._() {
+    _hostMethodChannel.setMethodCallHandler((call) async {
+      switch (call.method) {
+        case "switchHide":
+          for (final state in ToolbarState.states.values) {
+            if (state.sessionId != null) {
+              state.switchHide(state.sessionId!);
+            }
+          }
+          break;
+      }
+    });
+  }
+
   /// Bump the position of the mouse cursor, if applicable
   Future<bool> bumpMouse({required int dx, required int dy}) async {
     // No debug output; this call is too chatty.
