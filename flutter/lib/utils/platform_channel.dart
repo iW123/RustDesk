@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hbb/main.dart';
 import 'package:flutter_hbb/common.dart';
 import 'package:flutter_hbb/desktop/widgets/remote_toolbar.dart';
+import 'dart:io';
 
 enum SystemWindowTheme { light, dark }
 
