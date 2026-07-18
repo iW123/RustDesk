@@ -3450,7 +3450,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
     return TextButtonTheme(
       data: TextButtonThemeData(style: buttonStyle),
       child: ClipRRect(  //MARK: WU 拖动栏
-          borderRadius: borderRadius,
+          borderRadius: widget.borderRadius,
           clipBehavior: Clip.antiAlias,
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
