@@ -20,6 +20,12 @@ class RdPlatformChannel {
     _hostMethodChannel.setMethodCallHandler((call) async {
       switch (call.method) {
         case "switchHide":
+        let alert = NSAlert()
+        alert.messageText = "Hide Toolbar"
+        alert.informativeText = "switchHide clicked"
+        alert.alertStyle = .informational
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
           for (final state in ToolbarState.states.values) {
             if (state.sessionId != null) {
               state.switchHide(state.sessionId!);
