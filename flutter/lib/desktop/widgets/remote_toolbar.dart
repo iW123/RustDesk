@@ -785,8 +785,8 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         child: ClipRRect(  //MARK: WU 拖动栏
           borderRadius: borderRadius,
           clipBehavior: Clip.antiAlias,
-          child: BackdropFilter(
-            // filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+          // child: BackdropFilter(
+          //   filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Material(
               // color: Colors.red.withOpacity(0.08),
               child: _DraggableShowHide(
@@ -810,7 +810,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
                 borderRadius: borderRadius,
               ),
             ),
-          ),
+          // ),
         ),
       );
     });
