@@ -786,9 +786,9 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           borderRadius: borderRadius,
           clipBehavior: Clip.antiAlias,
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+            // filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Material(
-              color: Colors.red.withOpacity(0.08),
+              // color: Colors.red.withOpacity(0.08),
               child: _DraggableShowHide(
                 id: widget.id,
                 ffi: widget.ffi,
@@ -3449,17 +3449,20 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
     );
     return TextButtonTheme(
       data: TextButtonThemeData(style: buttonStyle),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.red,  //MARK: WU 拖动栏按钮背景
-
-          borderRadius: widget.borderRadius,
-        ),
-        child: SizedBox(
-          height: widget.isHorizontal ? 24 : null,
-          width: widget.isHorizontal ? null : 24,
-          child: child,
-        ),
+      child: ClipRRect(  //MARK: WU 拖动栏
+          borderRadius: borderRadius,
+          clipBehavior: Clip.antiAlias,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+            child: Material(
+              color: Colors.red.withOpacity(0.08),
+              child: SizedBox(
+                  height: widget.isHorizontal ? 24 : null,
+                  width: widget.isHorizontal ? null : 24,
+                  child: child,
+              ),
+            ),
+          ),
       ),
     );
   }
