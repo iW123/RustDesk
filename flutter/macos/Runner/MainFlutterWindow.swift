@@ -36,6 +36,7 @@ class RelativeMouseState {
 }
 
 class MainFlutterWindow: NSWindow {
+    var WSRustdeskChannel: FlutterMethodChannel?
     override func awakeFromNib() {
         rustdesk_core_main();
         let flutterViewController = FlutterViewController.init()
@@ -66,8 +67,30 @@ class MainFlutterWindow: NSWindow {
             WindowSizePlugin.register(with: controller.registrar(forPlugin: "WindowSizePlugin"))
             TextureRgbaRendererPlugin.register(with: controller.registrar(forPlugin: "TextureRgbaRendererPlugin"))
         }
-
+        
+        WSSetupMenu()
+        
         super.awakeFromNib()
+    }
+    
+    func WSSetupMenu() {
+        let hideToolbarItem = NSMenuItem(
+            title: "Hide Toolbar",
+            action: #selector(WSToggleToolbar),
+            keyEquivalent: "t"
+        )
+        hideToolbarItem.target = self
+        if let viewMenu = NSApp.mainMenu?.item(withTitle: "View")?.submenu {
+            viewMenu.addItem(hideToolbarItem)
+        }
+    }
+
+    @objc func WSToggleToolbar() {
+        print("Hide Toolbar")
+        WSRustdeskChannel?.invokeMethod(
+            "switchHide",
+            arguments: nil
+        )
     }
 
     override public func order(_ place: NSWindow.OrderingMode, relativeTo otherWin: Int) {
@@ -180,6 +203,7 @@ class MainFlutterWindow: NSWindow {
 
     public func setMethodHandler(registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "org.rustdesk.rustdesk/host", binaryMessenger: registrar.messenger)
+        self.WSRustdeskChannel = channel
         channel.setMethodCallHandler({
             (call, result) -> Void in
                 switch call.method {
