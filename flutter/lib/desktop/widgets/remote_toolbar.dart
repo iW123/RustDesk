@@ -787,13 +787,10 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           clipBehavior: Clip.antiAlias,  // ⭐必须加 Clip.hardEdge Clip.antiAlias
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
-            child: Container(
+            child: Material(
               decoration: BoxDecoration(
                 color: Colors.red.withOpacity(0.08),
-                border: Border.all(
-                  color: Colors.red.withOpacity(0.8),
-                  width: 1,
-                ),
+                borderRadius: widget.borderRadius,
               ),
               child: _DraggableShowHide(
                 id: widget.id,
@@ -909,7 +906,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     borderRadius: toolbarBorderRadius,
     child: BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
-      child: Container(
+      child: Material(
         decoration: BoxDecoration(
           color: Colors.red.withOpacity(0.08),  // WU Sonoma 关键层
           // border: Border.all(
@@ -3490,6 +3487,10 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.transparent,  //MARK: WU 拖动栏按钮背景
+          border: Border.all(
+              color: Colors.red.withOpacity(0.8),
+              width: 1,
+          ),
           borderRadius: widget.borderRadius,
         ),
         child: SizedBox(
