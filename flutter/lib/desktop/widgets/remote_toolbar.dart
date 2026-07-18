@@ -788,10 +788,8 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Material(
-              decoration: BoxDecoration(
                 color: Colors.red.withOpacity(0.08),
                 borderRadius: widget.borderRadius,
-              ),
               child: _DraggableShowHide(
                 id: widget.id,
                 ffi: widget.ffi,
@@ -907,7 +905,6 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     child: BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
       child: Material(
-        decoration: BoxDecoration(
           color: Colors.red.withOpacity(0.08),  // WU Sonoma 关键层
           // border: Border.all(
           //     color: Colors.white.withOpacity(0.8),
@@ -940,7 +937,6 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           //     offset: const Offset(0, 12),
           //   ),
           // ],
-        ),
         child: SingleChildScrollView(
           scrollDirection: innerAxis,
           child: Theme(
