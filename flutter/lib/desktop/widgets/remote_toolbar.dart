@@ -348,7 +348,7 @@ class _ToolbarTheme {
 
   static const double buttonSize = 40;
   static const double buttonHMargin = 5;
-  static const double buttonVMargin = 20;
+  static const double buttonVMargin = 5;
   static const double iconRadius = 10;
   static const double elevation = 3;
 
@@ -788,7 +788,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Material(
-                color: Colors.red.withOpacity(0.08),
+              color: Colors.red.withOpacity(0.08),
               child: _DraggableShowHide(
                 id: widget.id,
                 ffi: widget.ffi,
@@ -898,44 +898,14 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     final outerAxis = isHorizontal ? Axis.vertical : Axis.horizontal;
     final spacer = isHorizontal
         ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
-        : SizedBox(height: _ToolbarTheme.buttonHMargin * 2);
+        : SizedBox(height: _ToolbarTheme.buttonVMargin * 2);
   final toolbarMaterial = ClipRRect(  //MARK: WU 工具栏
     borderRadius: toolbarBorderRadius,
     child: BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
       child: Material(
-          color: Colors.red.withOpacity(0.08),
-          // border: Border.all(
-          //     color: Colors.white.withOpacity(0.8),
-          //     width: 1,
-          // ),
-          // border: Border(
-          //   top: BorderSide(
-          //     color: Colors.white.withOpacity(0.8),
-          //     width: edge == _ToolbarEdge.top ? 0 : 1,
-          //   ),
-          //   bottom: BorderSide(
-          //     color: Colors.white.withOpacity(0.8),
-          //     width: edge == _ToolbarEdge.bottom ? 0 : 1,
-          //   ),
-          //   left: BorderSide(
-          //     color: Colors.white.withOpacity(0.8),
-          //     width: edge == _ToolbarEdge.left ? 0 : 1,
-          //   ),
-          //   right: BorderSide(
-          //     color: Colors.white.withOpacity(0.8),
-          //     width: edge == _ToolbarEdge.right ? 0 : 1,
-          //   ),
-          // ),
-          borderRadius: toolbarBorderRadius,
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.yellow.withOpacity(0.58),
-          //     blurRadius: 30,
-          //       spreadRadius: 1,
-          //     offset: const Offset(0, 12),
-          //   ),
-          // ],
+        color: Colors.red.withOpacity(0.08),
+        borderRadius: toolbarBorderRadius,
         child: SingleChildScrollView(
           scrollDirection: innerAxis,
           child: Theme(
@@ -2911,7 +2881,7 @@ class _IconMenuButtonState extends State<_IconMenuButton> {
           )),
     ).marginSymmetric(
         horizontal: widget.hMargin ?? _ToolbarTheme.buttonHMargin,
-        vertical: widget.vMargin ?? _ToolbarTheme.buttonVMargin);
+        vertical: widget.vMargin*2 ?? _ToolbarTheme.buttonVMargin*2);
     button = Tooltip(
       message: translate(widget.tooltip),
       child: button,
@@ -3481,7 +3451,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
       data: TextButtonThemeData(style: buttonStyle),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.transparent,  //MARK: WU 拖动栏按钮背景
+          color: Colors.red,  //MARK: WU 拖动栏按钮背景
 
           borderRadius: widget.borderRadius,
         ),
