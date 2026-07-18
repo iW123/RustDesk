@@ -346,8 +346,8 @@ class _ToolbarTheme {
   static const double height = 20.0;
   static const double dividerHeight = 12.0;
 
-  static const double buttonSize = 32;
-  static const double buttonHMargin = 6;
+  static const double buttonSize = 40;
+  static const double buttonHMargin = 2;
   static const double buttonVMargin = 6;
   static const double iconRadius = 10;
   static const double elevation = 3;
@@ -356,8 +356,8 @@ class _ToolbarTheme {
 
   static double menuBorderRadius = isWindows ? 5.0 : 7.0;
   static EdgeInsets menuPadding = isWindows
-      ? EdgeInsets.fromLTRB(6, 18, 6, 18)
-      : EdgeInsets.fromLTRB(6, 20, 6, 20);
+      ? EdgeInsets.fromLTRB(16, 18, 16, 18)
+      : EdgeInsets.fromLTRB(16, 20, 16, 20);
   static const double menuButtonBorderRadius = 3.0;
 
   static Color borderColor(BuildContext context) =>
@@ -898,8 +898,8 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     final innerAxis = isHorizontal ? Axis.horizontal : Axis.vertical;
     final outerAxis = isHorizontal ? Axis.vertical : Axis.horizontal;
     final spacer = isHorizontal
-        ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
-        : SizedBox(height: _ToolbarTheme.buttonHMargin * 8);
+        ? SizedBox(width: _ToolbarTheme.buttonHMargin * 4)
+        : SizedBox(height: _ToolbarTheme.buttonHMargin * 2);
   final toolbarMaterial = ClipRRect(  //MARK: WU 工具栏
     borderRadius: toolbarBorderRadius,
     child: BackdropFilter(
