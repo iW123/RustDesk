@@ -2,12 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hbb/main.dart';
 import 'package:flutter_hbb/common.dart';
+import 'package:flutter_hbb/desktop/widgets/remote_toolbar.dart';
 
 enum SystemWindowTheme { light, dark }
 
 /// The platform channel for RustDesk.
 class RdPlatformChannel {
-  RdPlatformChannel._();
 
   static final RdPlatformChannel _windowUtil = RdPlatformChannel._();
 
