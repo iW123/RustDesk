@@ -782,11 +782,11 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       final borderRadius = _collapseHandleBorderRadius(edge);
       return Offstage(
         offstage: _dragging.isTrue,
-        child: ClipRRect(  //MARK: WU 拖动栏
-          borderRadius: borderRadius,
-          clipBehavior: Clip.antiAlias,
-          // child: BackdropFilter(
-          //   filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+        // child: ClipRRect(  //MARK: WU 拖动栏
+        //   borderRadius: borderRadius,
+        //   clipBehavior: Clip.antiAlias,
+        //   child: BackdropFilter(
+        //     filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Material(
               // color: Colors.red.withOpacity(0.08),
               child: _DraggableShowHide(
@@ -809,7 +809,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
                 setMinimize: _minimize,
                 borderRadius: borderRadius,
               ),
-            ),
+          //   ),
           // ),
         ),
       );
@@ -2880,7 +2880,7 @@ class _IconMenuButtonState extends State<_IconMenuButton> {
                     child: icon)),
           )),
     ).marginSymmetric(
-        horizontal: (widget.hMargin ?? _ToolbarTheme.buttonHMargin) * 2.0,
+        horizontal: widget.hMargin ?? _ToolbarTheme.buttonHMargin,
         vertical: widget.vMargin ?? _ToolbarTheme.buttonVMargin);
     button = Tooltip(
       message: translate(widget.tooltip),
@@ -2968,7 +2968,7 @@ class _IconSubmenuButtonState extends State<_IconSubmenuButton> {
     return MenuBar(children: [
       button.marginSymmetric(
           horizontal: _ToolbarTheme.buttonHMargin,
-          vertical: _ToolbarTheme.buttonVMargin * 2.0)
+          vertical: _ToolbarTheme.buttonVMargin)
     ]);
   }
 }
