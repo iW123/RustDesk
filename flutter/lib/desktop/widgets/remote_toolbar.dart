@@ -348,7 +348,7 @@ class _ToolbarTheme {
 
   static const double buttonSize = 40;
   static const double buttonHMargin = 5;
-  static const double buttonVMargin = 10;
+  static const double buttonVMargin = 20;
   static const double iconRadius = 10;
   static const double elevation = 3;
 
