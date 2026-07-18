@@ -2881,7 +2881,7 @@ class _IconMenuButtonState extends State<_IconMenuButton> {
           )),
     ).marginSymmetric(
         horizontal: widget.hMargin ?? _ToolbarTheme.buttonHMargin,
-        vertical: widget.vMargin*2 ?? _ToolbarTheme.buttonVMargin*2);
+        vertical: (widget.vMargin ?? _ToolbarTheme.buttonVMargin) * 2.0);
     button = Tooltip(
       message: translate(widget.tooltip),
       child: button,
