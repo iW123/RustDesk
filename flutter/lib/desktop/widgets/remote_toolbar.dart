@@ -783,12 +783,12 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       return Offstage(
         offstage: _dragging.isTrue,
         child: ClipRRect(  //MARK: WU 拖动栏
+          borderRadius: borderRadius,
           clipBehavior: Clip.antiAlias,
           child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
-              child: Material(
+            filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+            child: Material(
                 color: Colors.white.withOpacity(0.08),
-              borderRadius: borderRadius,
               child: _DraggableShowHide(
                 id: widget.id,
                 ffi: widget.ffi,
@@ -897,7 +897,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     final innerAxis = isHorizontal ? Axis.horizontal : Axis.vertical;
     final outerAxis = isHorizontal ? Axis.vertical : Axis.horizontal;
     final spacer = isHorizontal
-        ? SizedBox(width: _ToolbarTheme.buttonHMargin * 4)
+        ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
         : SizedBox(height: _ToolbarTheme.buttonHMargin * 2);
   final toolbarMaterial = ClipRRect(  //MARK: WU 工具栏
     borderRadius: toolbarBorderRadius,
