@@ -340,7 +340,7 @@ class _ToolbarTheme {
   static const double height = 20.0;
   static const double dividerHeight = 12.0;
 
-  static const double buttonSize = 32;
+  static const double buttonSize = 38;
   static const double buttonHMargin = 10;
   static const double buttonVMargin = 10;
   static const double iconRadius = 10;
@@ -782,11 +782,12 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
             filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.green.withOpacity(0.8),
+                color: Colors.red.withOpacity(0.08),
                 border: Border.all(
                   color: Colors.red.withOpacity(0.8),
                   width: 1,
                 ),
+		borderRadius: widget.borderRadius,
               ),
               child: _DraggableShowHide(
                 id: widget.id,
