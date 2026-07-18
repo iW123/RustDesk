@@ -245,6 +245,9 @@ void _cacheToolbarDockingOptions({
 }
 
 class ToolbarState {
+  static final Map<SessionID, ToolbarState> states = {};
+  SessionID? sessionId;
+  
   late RxBool _pin;
 
   RxBool collapse = false.obs;
@@ -276,6 +279,9 @@ class ToolbarState {
   /// Initialize all toolbar states from session options.
   /// This should be called once when the toolbar is first created.
   Future<void> init(SessionID sessionId) async {
+    this.sessionId = sessionId;
+    states[sessionId] = this;
+    
     if (initialized.value || _isInitializing) return;
     _isInitializing = true;
 
@@ -682,6 +688,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
   @override
   dispose() {
     ++_dockingOptionSyncSerial;
+    ToolbarState.states.remove(widget.ffi.sessionId);
     widget.onEnterOrLeaveImageCleaner(identityHashCode(this));
     super.dispose();
   }
@@ -787,7 +794,6 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
                   color: Colors.red.withOpacity(0.8),
                   width: 1,
                 ),
-		borderRadius: widget.borderRadius,
               ),
               child: _DraggableShowHide(
                 id: widget.id,
