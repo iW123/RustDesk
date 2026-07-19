@@ -79,10 +79,10 @@ class MainFlutterWindow: NSWindow {
         let WSHideToolbarItem = NSMenuItem(
             title: "Hide Toolbar",
             action: #selector(WSToggleToolbar),
-            keyEquivalent: "h"
+            keyEquivalent: "t"
         )
-        WSHideToolbarItem.keyEquivalentModifierMask = [.command, .option]
         WSHideToolbarItem.target = self
+        WSHideToolbarItem.keyEquivalentModifierMask = [.command, .option]
         WSToolbarMenuItem = WSHideToolbarItem
         if let WSViewMenu = NSApp.mainMenu?.item(withTitle: "View")?.submenu {
             WSViewMenu.addItem(WSHideToolbarItem)
