@@ -3466,7 +3466,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
               color: Colors.red.withOpacity(0.08),
               child: Padding(
                   // padding: const EdgeInsets.all(6.0),
-                  padding: EdgeInsets.symmetric(horizontal: isHorizontal ? 10 : 5, vertical: isHorizontal ? 5 : 10,),
+                  padding: EdgeInsets.symmetric(horizontal: widget.isHorizontal ? 10 : 5, vertical: isHorizontal ? 5 : 10,),
                   child: SizedBox(
                       height: widget.isHorizontal ? 24 : null,
                       width: widget.isHorizontal ? null : 24,
