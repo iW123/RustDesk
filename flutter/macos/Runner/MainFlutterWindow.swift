@@ -79,11 +79,11 @@ class MainFlutterWindow: NSWindow {
         let WSHideToolbarItem = NSMenuItem(
             title: "Hide Toolbar",
             action: #selector(WSToggleToolbar),
-            keyEquivalent: "t"
+            keyEquivalent: "h"
         )
-        WSHideToolbarItem.keyEquivalentModifierMask = [.command, .control]
-        WSToolbarMenuItem = WSHideToolbarItem
         WSHideToolbarItem.target = self
+        WSHideToolbarItem.keyEquivalentModifierMask = [.command, .option]
+        WSToolbarMenuItem = WSHideToolbarItem
         if let WSViewMenu = NSApp.mainMenu?.item(withTitle: "View")?.submenu {
             WSViewMenu.addItem(WSHideToolbarItem)
         }
@@ -96,16 +96,18 @@ class MainFlutterWindow: NSWindow {
 //        alert.alertStyle = .informational
 //        alert.addButton(withTitle: "OK")
 //        alert.runModal()
-        WSIsToolbarHidden.toggle()
-        WSToolbarMenuItem?.title = WSIsToolbarHidden ? "Show Toolbar" : "Hide Toolbar"
-        WSRustdeskChannel?.invokeMethod(
-            "switchHide",
-            arguments: nil
-        ) { result in
-            if let hidden = result as? Bool {
-                self.WSToolbarMenuItem?.title = hidden ? "Show Toolbar" : "Hide Toolbar"
-            }
-        }
+        // WSIsToolbarHidden.toggle()
+        // WSToolbarMenuItem?.title = WSIsToolbarHidden ? "Show Toolbar" : "Hide Toolbar"
+		 WSRustdeskChannel?.invokeMethod(
+		     "switchHide",
+		     arguments: nil
+		 ) { result in
+		     DispatchQueue.main.async {
+		         if let hidden = result as? Bool {
+		             self.WSToolbarMenuItem?.title = hidden ? "Show Toolbar" : "Hide Toolbar"
+		         }
+		     }
+		 }
     }
 
     override public func order(_ place: NSWindow.OrderingMode, relativeTo otherWin: Int) {
