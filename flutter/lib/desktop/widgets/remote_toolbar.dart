@@ -71,7 +71,7 @@ double _clampToolbarFraction(double fraction, double left, double right) {
 
 Size _toolbarSizeForEdge(_ToolbarEdge edge, Size? measured) {
   final isHorizontal = _isHorizontalEdge(edge);
-  final fallback = isHorizontal ? const Size(360, 60) : const Size(60, 360);
+  final fallback = isHorizontal ? const Size(360, 80) : const Size(80, 360);
   final size = measured ?? fallback;
   final long = size.longestSide;
   final short = size.shortestSide;
@@ -309,9 +309,10 @@ class ToolbarState {
   }
 
   // Switch hide state for entire toolbar visibility
-  switchHide(SessionID sessionId) async {
-    bind.sessionToggleOption(sessionId: sessionId, value: kOptionHideToolbar);
+  Future<bool> switchHide(SessionID sessionId) async {
+    await bind.sessionToggleOption(sessionId: sessionId, value: kOptionHideToolbar);
     hide.value = !hide.value;
+    return hide.value;
   }
 
   switchPin() async {
@@ -782,15 +783,16 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
       final borderRadius = _collapseHandleBorderRadius(edge);
       return Offstage(
         offstage: _dragging.isTrue,
-        // child: ClipRRect(  //MARK: WU 拖动栏
+        // child: ClipRRect(  //MARK: WU 拖动栏 静止状态
         //   borderRadius: borderRadius,
         //   clipBehavior: Clip.antiAlias,
         //   child: BackdropFilter(
         //     filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Material(
-          elevation: _ToolbarTheme.elevation,
-          shadowColor: MyTheme.color(context).shadow,
-          borderRadius: borderRadius,
+              elevation: _ToolbarTheme.elevation,
+              shadowColor: MyTheme.color(context).shadow,
+              borderRadius: borderRadius,
+              color: Colors.transparent,
               child: _DraggableShowHide(
                 id: widget.id,
                 ffi: widget.ffi,
@@ -3451,7 +3453,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
     );
     return TextButtonTheme(
       data: TextButtonThemeData(style: buttonStyle),
-      child: ClipRRect(  //MARK: WU 拖动栏
+      child: ClipRRect(  //MARK: WU 拖动栏 拖动状态 会覆盖静止背景
           borderRadius: widget.borderRadius,
           clipBehavior: Clip.antiAlias,
           child: BackdropFilter(
