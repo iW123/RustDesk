@@ -37,6 +37,8 @@ class RelativeMouseState {
 
 class MainFlutterWindow: NSWindow {
     var WSRustdeskChannel: FlutterMethodChannel?
+    var WSToolbarMenuItem: NSMenuItem?
+    var WSIsToolbarHidden = false
     override func awakeFromNib() {
         rustdesk_core_main();
         let flutterViewController = FlutterViewController.init()
@@ -74,28 +76,35 @@ class MainFlutterWindow: NSWindow {
     }
     
     func WSSetupMenu() {
-        let hideToolbarItem = NSMenuItem(
+        let WSHideToolbarItem = NSMenuItem(
             title: "Hide Toolbar",
             action: #selector(WSToggleToolbar),
             keyEquivalent: "t"
         )
-        hideToolbarItem.target = self
-        if let viewMenu = NSApp.mainMenu?.item(withTitle: "View")?.submenu {
-            viewMenu.addItem(hideToolbarItem)
+        WSToolbarMenuItem = hideToolbarItem
+        WSHideToolbarItem.target = self
+        if let WSViewMenu = NSApp.mainMenu?.item(withTitle: "View")?.submenu {
+            WSViewMenu.addItem(WSHideToolbarItem)
         }
     }
 
     @objc func WSToggleToolbar() {
-        let alert = NSAlert()
-        alert.messageText = "Hide Toolbar"
-        alert.informativeText = "SwitchHide \(WSRustdeskChannel)"
-        alert.alertStyle = .informational
-        alert.addButton(withTitle: "OK")
-        alert.runModal()
+//        let alert = NSAlert()
+//        alert.messageText = "Hide Toolbar"
+//        alert.informativeText = "SwitchHide \(WSRustdeskChannel)"
+//        alert.alertStyle = .informational
+//        alert.addButton(withTitle: "OK")
+//        alert.runModal()
+        WSIsToolbarHidden.toggle()
+        WSToolbarMenuItem?.title = WSIsToolbarHidden ? "Show Toolbar" : "Hide Toolbar"
         WSRustdeskChannel?.invokeMethod(
             "switchHide",
             arguments: nil
-        )
+        ) { result in
+            if let hidden = result as? Bool {
+                self.WSToolbarMenuItem?.title = hidden ? "Show Toolbar" : "Hide Toolbar"
+            }
+        }
     }
 
     override public func order(_ place: NSWindow.OrderingMode, relativeTo otherWin: Int) {
