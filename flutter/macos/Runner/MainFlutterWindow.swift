@@ -82,7 +82,7 @@ class MainFlutterWindow: NSWindow {
             keyEquivalent: "t"
         )
         WSHideToolbarItem.target = self
-        WSHideToolbarItem.keyEquivalentModifierMask = [.command, .option]
+        WSHideToolbarItem.keyEquivalentModifierMask = [.command, .option, .control]
         WSToolbarMenuItem = WSHideToolbarItem
         if let WSViewMenu = NSApp.mainMenu?.item(withTitle: "View")?.submenu {
             WSViewMenu.addItem(WSHideToolbarItem)
