@@ -789,8 +789,8 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         //   child: BackdropFilter(
         //     filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
             child: Material(
-              elevation: _ToolbarTheme.elevation,
-              shadowColor: MyTheme.color(context).shadow,
+              // elevation: _ToolbarTheme.elevation,
+              // shadowColor: MyTheme.color(context).shadow,
               borderRadius: borderRadius,
               color: Colors.transparent,
               child: _DraggableShowHide(
