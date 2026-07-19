@@ -2884,7 +2884,7 @@ class _IconMenuButtonState extends State<_IconMenuButton> {
                     child: icon)),
           )),
     ).marginSymmetric(
-        horizontal: widget.hMargin ?? (widget.isHorizontal ？ _ToolbarTheme.buttonHMargin : _ToolbarTheme.buttonHMargin * 2.0),
+        horizontal: widget.hMargin ?? _ToolbarTheme.buttonHMargin,
         vertical: widget.vMargin ?? _ToolbarTheme.buttonVMargin);
     button = Tooltip(
       message: translate(widget.tooltip),
@@ -2971,7 +2971,7 @@ class _IconSubmenuButtonState extends State<_IconSubmenuButton> {
                 .toList()));
     return MenuBar(children: [
       button.marginSymmetric(
-          horizontal: _ToolbarTheme.buttonHMargin,
+          horizontal: widget.isHorizontal ？ _ToolbarTheme.buttonHMargin : _ToolbarTheme.buttonHMargin * 2.0,
           vertical: _ToolbarTheme.buttonVMargin * 2.0)
     ]);
   }
