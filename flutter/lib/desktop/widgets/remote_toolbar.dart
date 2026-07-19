@@ -792,7 +792,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
               // elevation: _ToolbarTheme.elevation,
               // shadowColor: MyTheme.color(context).shadow,
               borderRadius: borderRadius,
-              color: Colors.transparent,
+              color: Colors.red.withOpacity(0.08),
               child: _DraggableShowHide(
                 id: widget.id,
                 ffi: widget.ffi,
@@ -2972,7 +2972,7 @@ class _IconSubmenuButtonState extends State<_IconSubmenuButton> {
     return MenuBar(children: [
       button.marginSymmetric(
           horizontal: _ToolbarTheme.buttonHMargin,
-          vertical: _ToolbarTheme.buttonVMargin)
+          vertical: _ToolbarTheme.buttonVMargin * 2.0)
     ]);
   }
 }
