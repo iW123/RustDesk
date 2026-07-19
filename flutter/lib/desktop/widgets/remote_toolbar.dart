@@ -902,7 +902,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
     final outerAxis = isHorizontal ? Axis.vertical : Axis.horizontal;
     final spacer = isHorizontal
         ? SizedBox(width: _ToolbarTheme.buttonHMargin * 2)
-        : SizedBox(height: _ToolbarTheme.buttonVMargin * 2);
+        : SizedBox(height: _ToolbarTheme.buttonVMargin * 4);
   final toolbarMaterial = ClipRRect(  //MARK: WU 工具栏
     borderRadius: toolbarBorderRadius,
     child: BackdropFilter(
@@ -2971,7 +2971,7 @@ class _IconSubmenuButtonState extends State<_IconSubmenuButton> {
                 .toList()));
     return MenuBar(children: [
       button.marginSymmetric(
-          horizontal: _ToolbarTheme.buttonHMargin * 2.0,
+          horizontal: _ToolbarTheme.buttonHMargin,
           vertical: _ToolbarTheme.buttonVMargin * 2.0)
     ]);
   }
