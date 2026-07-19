@@ -904,7 +904,7 @@ class _RemoteToolbarState extends State<RemoteToolbar> {
         ? SizedBox(width: _ToolbarTheme.buttonHMargin)
         : SizedBox(height: _ToolbarTheme.buttonVMargin);
   final toolbarMaterial = ClipRRect(  //MARK: WU 工具栏
-    // borderRadius: toolbarBorderRadius,
+    borderRadius: toolbarBorderRadius,
     child: BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
       child: Material(
@@ -3466,7 +3466,7 @@ class _DraggableShowHideState extends State<_DraggableShowHide> {
               color: Colors.red.withOpacity(0.08),
               child: Padding(
                   // padding: const EdgeInsets.all(6.0),
-                  padding: EdgeInsets.symmetric(horizontal: widget.isHorizontal ? 10 : 5, vertical: widget.isHorizontal ? 5 : 10,),
+                  padding: EdgeInsets.symmetric(horizontal: widget.isHorizontal ? 8 : 0, vertical: widget.isHorizontal ? 0 : 8,),
                   child: SizedBox(
                       height: widget.isHorizontal ? 24 : null,
                       width: widget.isHorizontal ? null : 24,
