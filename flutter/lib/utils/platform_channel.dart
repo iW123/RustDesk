@@ -24,7 +24,7 @@ class RdPlatformChannel {
           // File('/tmp/rustdesk_switchHide.log').writeAsStringSync('received\n');
           for (final state in ToolbarState.states.values) {
             if (state.sessionId != null) {
-              final hidden = state.switchHide(state.sessionId!);
+              final hidden = await state.switchHide(state.sessionId!);
               return hidden;
             }
           }
