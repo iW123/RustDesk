@@ -71,7 +71,7 @@ double _clampToolbarFraction(double fraction, double left, double right) {
 
 Size _toolbarSizeForEdge(_ToolbarEdge edge, Size? measured) {
   final isHorizontal = _isHorizontalEdge(edge);
-  final fallback = isHorizontal ? const Size(360, 40) : const Size(40, 360);
+  final fallback = isHorizontal ? const Size(360, 60) : const Size(60, 360);
   final size = measured ?? fallback;
   final long = size.longestSide;
   final short = size.shortestSide;
