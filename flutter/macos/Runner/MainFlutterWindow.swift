@@ -82,6 +82,7 @@ class MainFlutterWindow: NSWindow {
             keyEquivalent: ""
         )
         WSHideToolbarItem.target = self
+        WSToolbarMenuItem = WSHideToolbarItem
         // WSHideToolbarItem.keyEquivalentModifierMask = [.command, .option]
         // WSToolbarMenuItem = WSHideToolbarItem
         if let WSViewMenu = NSApp.mainMenu?.item(withTitle: "View")?.submenu {
@@ -98,16 +99,17 @@ class MainFlutterWindow: NSWindow {
 //        alert.runModal()
         // WSIsToolbarHidden.toggle()
         // WSToolbarMenuItem?.title = WSIsToolbarHidden ? "Show Toolbar" : "Hide Toolbar"
-		 WSRustdeskChannel?.invokeMethod(
-		     "switchHide",
-		     arguments: nil
-		 ) { result in
-		     DispatchQueue.main.async {
-		         if let hidden = result as? Bool {
-		             self.WSToolbarMenuItem?.title = hidden ? "Show Toolbar" : "Hide Toolbar"
-		         }
-		     }
-		 }
+        WSRustdeskChannel?.invokeMethod(
+            "switchHide",
+            arguments: nil
+        ) { result in
+            DispatchQueue.main.async {
+                if let hidden = result as? Bool {
+                    self.WSIsToolbarHidden = hidden
+                    self.WSToolbarMenuItem?.title = hidden ? "Show Toolbar" : "Hide Toolbar"
+                }
+            }
+        }
     }
 
     override public func order(_ place: NSWindow.OrderingMode, relativeTo otherWin: Int) {
