@@ -17,14 +17,15 @@ class RdPlatformChannel {
       MethodChannel("org.rustdesk.rustdesk/host");
 
   RdPlatformChannel._() {
-    File('/tmp/rustdesk_channel_init.log').writeAsStringSync('init\n');
+    // File('/tmp/rustdesk_channel_init.log').writeAsStringSync('init\n');
     _hostMethodChannel.setMethodCallHandler((call) async {
       switch (call.method) {
         case "switchHide":
-          File('/tmp/rustdesk_switchHide.log').writeAsStringSync('received\n');
+          // File('/tmp/rustdesk_switchHide.log').writeAsStringSync('received\n');
           for (final state in ToolbarState.states.values) {
             if (state.sessionId != null) {
-              state.switchHide(state.sessionId!);
+              final hidden = state.switchHide(state.sessionId!);
+              return hidden;
             }
           }
           break;
