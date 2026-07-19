@@ -2971,7 +2971,7 @@ class _IconSubmenuButtonState extends State<_IconSubmenuButton> {
                 .toList()));
     return MenuBar(children: [
       button.marginSymmetric(
-          horizontal: _ToolbarTheme.buttonHMargin,
+          horizontal: _ToolbarTheme.buttonHMargin * 2.0,
           vertical: _ToolbarTheme.buttonVMargin * 2.0)
     ]);
   }
